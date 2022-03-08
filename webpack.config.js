@@ -47,16 +47,16 @@ module.exports = {
                     'sass-loader'
                 ]
             },
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                loader: {
-                    loader: 'babel-loader',
-                    options: {
-                        preset: ['@babel/preset-env']
-                    }
-                }
-            },
+            // {
+            //     test: /\.js$/,
+            //     exclude: /node_modules/,
+            //     loader: {
+            //         loader: 'babel-loader',
+            //         options: {
+            //             preset: ['@babel/preset-env']
+            //         }
+            //     }
+            // },
         ]
     }
 }
