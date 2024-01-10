@@ -1,0 +1,18 @@
+@import "../../sass/mixins.scss";
+
+.userImageLink {
+  height: 100%;
+  @include flex-center;
+}
+
+.userImage {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  @include flex-center;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: "cover";
+  }
+}

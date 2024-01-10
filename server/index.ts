@@ -4,6 +4,10 @@ import mongoose from "mongoose";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
+import auth from "./routes/auth.route";
+import user from "./routes/user.route";
+import project from "./routes/project.route";
+
 dotenv.config();
 
 const app: Application = express();
@@ -24,6 +28,10 @@ app.use(
 );
 
 app.use(express.json());
+
+app.use("/auth", auth);
+app.use("/user", user);
+app.use("/project", project);
 
 const port = process.env.PORT || 8000;
 

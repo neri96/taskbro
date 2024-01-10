@@ -1,0 +1,39 @@
+@import "../../sass/vars.scss";
+
+.field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px;
+  box-sizing: border-box;
+  position: relative;
+  label {
+    margin-bottom: 5px;
+  }
+  input,
+  textarea {
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: #ccc;
+    margin-bottom: 15px;
+  }
+
+  input {
+    height: 20px;
+    padding: 0 5px;
+    box-sizing: border-box;
+  }
+
+  textarea {
+    height: 90px;
+    resize: none;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+}
+
+.fieldError {
+  color: $danger;
+}

@@ -1,0 +1,23 @@
+@mixin modalHeader {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin remaining-space {
+  flex-grow: 1;
+}
+
+@mixin grid-list($height: 150px, $gap: 5px) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-auto-rows: $height;
+  gap: $gap;
+}

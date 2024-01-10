@@ -1,0 +1,20 @@
+.button {
+  background-color: #808080;
+  border: none;
+  outline: none;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  cursor: pointer;
+  &.success {
+    background-color: #009900;
+  }
+  &.danger {
+    background-color: #ff3333;
+  }
+  &.disabled {
+    opacity: 0.4 !important;
+    cursor: not-allowed;
+  }
+}

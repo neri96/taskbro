@@ -1,0 +1,14 @@
+.projectDetailsMember {
+  height: 50px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  transition: 300ms;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
+}

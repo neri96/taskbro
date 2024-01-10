@@ -1,0 +1,10 @@
+@import "../../sass/vars.scss";
+
+.serverError {
+  height: 40px;
+  width: 100%;
+  color: $danger;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

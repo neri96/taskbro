@@ -1,0 +1,36 @@
+@import "../../../../sass/vars.scss";
+
+.projectDetails {
+  // max-width: 500px;
+  border-radius: 5px;
+  background-color: #595959;
+  box-shadow: $box-shadow;
+  color: $text-color;
+  padding: 0 10px;
+  box-sizing: border-box;
+  cursor: pointer;
+  &.cancelled {
+    background-color: rgb(255, 77, 77);
+    opacity: 0.5;
+  }
+  &.completed {
+    background-color: #004d00;
+  }
+}
+
+.projectDetailsHeader {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projectDetailsDeadline {
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.projectDetailsFooter {
+  height: 40px;
+}

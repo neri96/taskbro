@@ -1,0 +1,7 @@
+.pageLayout {
+  min-height: calc(100vh - 130px);
+  &.fixed {
+    min-height: 600px;
+    height: calc(100vh - 130px);
+  }
+}

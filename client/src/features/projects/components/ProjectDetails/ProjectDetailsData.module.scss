@@ -1,0 +1,23 @@
+.projectDetailsData {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  h4 {
+    margin: 0;
+  }
+}
+
+.projectDetailsStatus {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: relative;
+  span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    font-size: 13px;
+  }
+}

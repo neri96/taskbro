@@ -1,0 +1,38 @@
+.userList {
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+  padding: 0 15px;
+}
+
+.userListData {
+  display: flex;
+}
+
+.userListPic {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    height: 35px !important;
+    width: 35px;
+    border-radius: 50%;
+  }
+}
+
+.userListName,
+.userListModify {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  box-sizing: border-box;
+  h4 {
+    margin: 0;
+  }
+}
+
+.userListModify {
+  padding: 0;
+}
