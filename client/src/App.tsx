@@ -1,7 +1,13 @@
+import { useEffect } from "react";
+
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import { useTypedSelector } from "./app/store";
+import { useAppDispatch } from "./app/store";
 import { selectAuthStatus } from "./features/auth/authSlice";
+import { setCredentials } from "./features/auth/authSlice";
+
+import { useMeQuery } from "./app/services/user";
 
 import { AppProvider } from "./providers";
 
@@ -10,7 +16,19 @@ import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 
 const App = () => {
+  const dispatch = useAppDispatch();
+
   const isAuth = useTypedSelector(selectAuthStatus);
+
+  const { data, isLoading } = useMeQuery(undefined);
+
+  useEffect(() => {
+    if (data) {
+      const { user, token } = data;
+
+      dispatch(setCredentials({ user, token }));
+    }
+  }, [data]);
 
   return (
     <AppProvider>

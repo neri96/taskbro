@@ -62,6 +62,31 @@ export const me = async (req: Request, res: Response) => {
   }
 };
 
+export const getOne = async (req: Request, res: Response) => {
+  const { nickname } = req.query;
+
+  try {
+    const user = await User.findOne({ nickname })
+      .select("-password")
+      .populate("favorites", "id name nickname image job bio");
+
+    if (user?.image) {
+      await setImgUrl(user);
+    }
+
+    if (user?.favorites)
+      for (const fav of user.favorites) {
+        if (fav.image) {
+          await setImgUrl(fav);
+        }
+      }
+
+    return res.status(202).json(user);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const search = async (req: Request, res: Response) => {
   const { searchName } = req.query;
   try {
