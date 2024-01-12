@@ -1,0 +1,29 @@
+.favorites {
+  width: 350px;
+  background-color: rgba($color: #000000, $alpha: 0.3);
+  position: relative;
+}
+
+.favoritesSearch {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+
+@media screen and (max-width: 765px) {
+  .favorites {
+    height: 100%;
+    width: 300px;
+    max-width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    background-color: rgba($color: #000000, $alpha: 0.7);
+    transform: translateX(-300px);
+    transition: 300ms ease-out;
+    &.open {
+      transform: translateX(0);
+    }
+  }
+}

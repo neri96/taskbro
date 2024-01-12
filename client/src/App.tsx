@@ -14,6 +14,7 @@ import { AppProvider } from "./providers";
 import Layout from "./components/Layout";
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
+import Profile from "./pages/Profile";
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -37,6 +38,10 @@ const App = () => {
           <Route
             path="/"
             element={isAuth ? <Home /> : <Navigate to="/auth" replace />}
+          />
+          <Route
+            path="/user/:username"
+            element={isAuth ? <Profile /> : <Navigate to="/auth" replace />}
           />
           <Route
             path="/auth"

@@ -87,6 +87,36 @@ export const getOne = async (req: Request, res: Response) => {
   }
 };
 
+export const edit = async (req: Request, res: Response) => {
+  const { id, name, job, bio } = req.body;
+
+  try {
+    await User.updateOne({ _id: id }, { name, job, bio });
+
+    return res.status(200).json("Data has been updated");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const modifyFavList = async (req: Request, res: Response) => {
+  const { userId, favId } = req.body;
+
+  try {
+    const user = await User.findOne({ _id: userId });
+
+    if (user?.favorites.includes(favId)) {
+      await user.updateOne({ $pull: { favorites: favId } });
+    } else {
+      await user?.updateOne({ $push: { favorites: favId } });
+    }
+
+    return res.status(200).json("Favorite has been added");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const search = async (req: Request, res: Response) => {
   const { searchName } = req.query;
   try {
@@ -105,5 +135,30 @@ export const search = async (req: Request, res: Response) => {
     console.log(error);
 
     return res.status(500).json(error);
+  }
+};
+
+export const changeImage = async (
+  req: TypedRequestBody<{ id: string }>,
+  res: Response
+) => {
+  const { id } = req.body;
+
+  try {
+    if (req.file) {
+      const imgName = crypto.randomBytes(32).toString("hex");
+
+      await addFile(imgName, req.file.buffer, req.file.mimetype);
+
+      await User.findByIdAndUpdate({ _id: id }, { image: imgName });
+
+      return res.status(200).json("Successfully changed main image");
+    }
+
+    return res.status(400).json("Image change failed");
+  } catch (error) {
+    console.log(error);
+
+    return res.status(500).json("Something went wrong, try again later");
   }
 };

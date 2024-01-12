@@ -1,0 +1,59 @@
+.profileContent {
+  width: 100%;
+  position: relative;
+}
+
+.profileTopBar {
+  height: 35px;
+  ul {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    li {
+      margin: 0 5px;
+    }
+  }
+}
+
+.profileName {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    margin: 0;
+  }
+}
+
+.profileJob {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h4 {
+    margin: 0;
+  }
+}
+
+.profileBio {
+  display: flex;
+  justify-content: center;
+}
+
+.profileBioContainer {
+  width: 700px;
+  h4 {
+    line-height: 25px;
+    margin: 0;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 1095px) {
+  .profileBioContainer {
+    width: auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+}
