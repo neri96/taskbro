@@ -2,11 +2,15 @@ import express, { Application } from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
+import http from "http";
 import cookieParser from "cookie-parser";
+
+import { Server } from "socket.io";
 
 import auth from "./routes/auth.route";
 import user from "./routes/user.route";
 import project from "./routes/project.route";
+import chat from "./routes/chat.route";
 
 dotenv.config();
 
@@ -32,11 +36,38 @@ app.use(express.json());
 app.use("/auth", auth);
 app.use("/user", user);
 app.use("/project", project);
+app.use("/chat", chat);
+
+const server = http.createServer(app);
+
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173",
+  },
+});
+
+io.on("connection", (socket) => {
+  socket.on("join", (chat) => {
+    socket.join(chat);
+  });
+
+  socket.on("send", (data) => {
+    socket.to(data.chat).emit("get_message", data);
+  });
+
+  socket.on("join_private", (chat) => {
+    socket.join(chat);
+  });
+
+  socket.on("send_private", (data) => {
+    socket.to(data.chat).emit("get_private_message", data);
+  });
+});
 
 const port = process.env.PORT || 8000;
 
 mongoose.connect(process.env.MONGO_URI as string);
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is Fire at http://localhost:${port}`);
 });

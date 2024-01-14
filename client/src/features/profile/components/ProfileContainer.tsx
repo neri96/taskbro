@@ -6,9 +6,13 @@ import { useGetUserQuery } from "../../../app/services/user";
 
 import ProfileFavorites from "./ProfileFavorites";
 import ProfileContent from "./ProfileContent";
+import ProfileChat from "./ProfileChat";
 import Loading from "../../../components/Loading";
 
+import { ProfileChatStatusCtx } from "../../../context";
+
 export const ProfileContainer = () => {
+  const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
   const [isFavListOpen, setIsFavListOpen] = useState<boolean>(false);
 
   const location = useLocation();
@@ -35,13 +39,19 @@ export const ProfileContainer = () => {
         isFavListOpen={isFavListOpen}
         handleFavList={() => setIsFavListOpen((prevState) => !prevState)}
       />
-
-      <ProfileContent
-        data={data}
-        isLoading={isLoading}
-        isFetching={isFetching}
-        handleFavList={() => setIsFavListOpen((prevState) => !prevState)}
-      />
+      <ProfileChatStatusCtx.Provider
+        value={{
+          handleChatVisibility: () => setIsChatOpen((prevState) => !prevState),
+        }}
+      >
+        <ProfileContent
+          data={data}
+          isLoading={isLoading}
+          isFetching={isFetching}
+          handleFavList={() => setIsFavListOpen((prevState) => !prevState)}
+        />
+      </ProfileChatStatusCtx.Provider>
+      <ProfileChat isChatOpen={isChatOpen} companionId={data.id} />
     </div>
   );
 };

@@ -1,0 +1,60 @@
+@import "../../sass/vars.scss";
+
+.chatMessage {
+  display: flex;
+  align-items: flex-end;
+  color: $text-color;
+  margin: 5px 0;
+  &.myMessage {
+    margin-left: auto;
+    .chatMessageData {
+      background-color: rgb(49, 80, 70);
+    }
+    .chatMessageImage,
+    .chatMessageName {
+      display: none;
+    }
+  }
+}
+
+.chatMessageImage {
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 5px;
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.chatMessageData {
+  background-color: #333;
+  border-radius: 5px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.chatMessageName {
+  color: #e60073;
+  height: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.chatMessageContent {
+  display: flex;
+  align-items: center;
+  min-height: 30px;
+  p {
+    margin: 0;
+  }
+}
+
+.chatMessageDate {
+  font-size: 13px;
+  color: #999;
+  width: 100%;
+}

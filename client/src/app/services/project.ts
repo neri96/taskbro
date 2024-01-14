@@ -10,6 +10,13 @@ export interface ITask {
   completed: boolean;
 }
 
+export interface IChatData {
+  chat?: string;
+  from: string;
+  isPrivate: boolean;
+  to?: string;
+}
+
 export interface IProjectInput {
   title: string;
   deadline: number;

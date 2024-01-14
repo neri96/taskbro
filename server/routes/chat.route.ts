@@ -2,9 +2,14 @@ import express from "express";
 
 const router = express.Router();
 
-import { me, search } from "../controllers/user.controller";
+import {
+  getMessages,
+  getPrivateMessages,
+  createMessage,
+} from "../controllers/chat.controller";
 
-router.get("/me", me);
-router.get("/search", search);
+router.get("/messages", getMessages);
+router.get("/private-messages", getPrivateMessages);
+router.post("/create", createMessage);
 
 export default router;
