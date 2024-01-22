@@ -1,0 +1,23 @@
+@import "../../../sass/vars.scss";
+@import "../../../sass/mixins.scss";
+
+.notifQty {
+  position: absolute;
+  top: calc(100% - 12px);
+  left: 5px;
+  height: 20px;
+  width: 20px;
+  padding: 3px;
+  border-radius: 50%;
+  background-color: red;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $text-color;
+}
+
+.notifListHeader {
+  height: 70px;
+  @include flex-center;
+}
