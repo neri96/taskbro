@@ -1,0 +1,19 @@
+.ptSettings {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.ptSettingsList {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.ptSettingsItem {
+  margin: 0 7px;
+}

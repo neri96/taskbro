@@ -1,0 +1,10 @@
+.phUnderline {
+  height: 3px;
+  border-radius: 3px;
+  background: #fff;
+  transform: translateX(0);
+  transition: 300ms;
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+}

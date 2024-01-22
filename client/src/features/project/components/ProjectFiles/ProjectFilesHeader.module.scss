@@ -1,0 +1,30 @@
+.pfHeader {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.pfHeaderBtn {
+  margin: 0 10px;
+  width: 155px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pfHeaderUpload {
+  height: 100%;
+  position: relative;
+  label {
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: block;
+  }
+  input {
+    display: none;
+  }
+}

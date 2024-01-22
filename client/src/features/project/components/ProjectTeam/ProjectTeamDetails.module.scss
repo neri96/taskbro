@@ -1,0 +1,31 @@
+@import "../../../../sass/vars.scss";
+@import "../../../../sass/mixins.scss";
+
+.ptDetails {
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  background-color: #333;
+  position: relative;
+}
+
+.ptDetailsRemove {
+  height: 40px;
+  width: 30px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+}
+
+.ptDetailsBody {
+  height: calc(100% - 50px);
+  width: 100%;
+}
+
+.ptDetailsFooter {
+  height: 50px;
+  @include flex-center;
+}

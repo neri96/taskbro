@@ -1,0 +1,29 @@
+@import "../../../../sass/vars.scss";
+
+.projectMembers {
+  width: 70px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.projectMember {
+  height: 60px;
+  width: 60px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  box-shadow: $img-shadow;
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.projectMemberMore {
+  height: 40px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}

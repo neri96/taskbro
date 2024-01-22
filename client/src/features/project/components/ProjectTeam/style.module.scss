@@ -1,0 +1,10 @@
+@import "../../../../sass/vars.scss";
+@import "../../../../sass/mixins.scss";
+
+.projectTeam {
+  flex-grow: 1;
+  @include grid-list(250px, 10px);
+  padding: 10px;
+  box-sizing: border-box;
+  box-shadow: $box-shadow;
+}

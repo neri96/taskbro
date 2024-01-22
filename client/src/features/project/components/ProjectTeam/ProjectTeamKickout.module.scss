@@ -1,0 +1,19 @@
+@import "../../../../sass/mixins.scss";
+
+.ptKickoutBody {
+  height: 70px;
+  @include flex-center;
+}
+
+.ptKickoutFooter {
+  height: 50px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.ptKickoutBtns {
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+}

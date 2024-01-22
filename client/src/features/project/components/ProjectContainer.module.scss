@@ -1,0 +1,12 @@
+.product {
+  display: flex;
+  height: calc(100% - 70px);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.productContent {
+  height: 100%;
+  flex-grow: 1;
+}

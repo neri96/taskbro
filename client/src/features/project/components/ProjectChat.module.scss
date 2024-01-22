@@ -1,0 +1,18 @@
+.projectChat {
+  height: 100%;
+  width: 500px;
+  position: relative;
+}
+
+@media (max-width: 1100px) {
+  .projectChat {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateX(500px);
+    transition: 300ms ease-in-out;
+    &.isChatOpen {
+      transform: translateX(0);
+    }
+  }
+}

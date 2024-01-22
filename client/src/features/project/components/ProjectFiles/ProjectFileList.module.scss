@@ -1,0 +1,14 @@
+@import "../../../../sass/mixins.scss";
+
+.pfList {
+  height: calc(100vh - 70px);
+  overflow-y: auto;
+}
+
+.pfListDropArea {
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  @include grid-list;
+}
