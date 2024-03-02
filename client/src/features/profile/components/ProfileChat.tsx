@@ -9,6 +9,7 @@ import {
 } from "../../../app/services/chat";
 
 import AnimElement from "../../../components/AnimElement";
+import CloseSidebar, { ClosePosition } from "../../../components/CloseSidebar";
 import Chat from "../../../components/Chat";
 import Loading from "../../../components/Loading";
 
@@ -19,9 +20,11 @@ const socket = io("http://localhost:8000");
 const ProfileChat = ({
   isChatOpen,
   companionId,
+  handleChatVisibility,
 }: {
   isChatOpen: boolean;
   companionId: string;
+  handleChatVisibility: () => void;
 }) => {
   const userData = useUserData();
 
@@ -62,7 +65,15 @@ const ProfileChat = ({
   }
 
   return (
-    <AnimElement isOpen={isChatOpen} style={{ position: "relative" }}>
+    <AnimElement
+      isOpen={isChatOpen}
+      style={{ position: "relative", minWidth: "400px" }}
+    >
+      <CloseSidebar
+        position={ClosePosition.Left}
+        isSidebarOpen={isChatOpen}
+        handleSidebar={handleChatVisibility}
+      />
       <Chat
         data={data}
         chatId={chatId}

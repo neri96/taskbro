@@ -1,5 +1,3 @@
-import { isMobile } from "react-device-detect";
-
 import Icon from "./Icon";
 
 import IcClose from "../assets/icons/close.svg";
@@ -18,7 +16,7 @@ const CloseSidebar = ({
   isSidebarOpen: boolean;
   handleSidebar: () => void;
 }) => {
-  return isMobile && isSidebarOpen ? (
+  return isSidebarOpen ? (
     <div
       style={{
         position: "absolute",
