@@ -11,6 +11,7 @@ import auth from "./routes/auth.route";
 import user from "./routes/user.route";
 import project from "./routes/project.route";
 import chat from "./routes/chat.route";
+import notification from "./routes/notification.route";
 
 dotenv.config();
 
@@ -37,6 +38,7 @@ app.use("/auth", auth);
 app.use("/user", user);
 app.use("/project", project);
 app.use("/chat", chat);
+app.use("/notification", notification);
 
 const server = http.createServer(app);
 
