@@ -71,20 +71,19 @@ const ProfileEdit = ({ userData }: { userData: IUserData }) => {
           <Input
             label="Name"
             name="name"
-            error={""}
+            error={errors.name?.message}
             register={register}
             rules={{
               required: "This field is required",
             }}
           />
-          <Input label="Job Title" name="job" error={""} register={register} />
           <Input
-            label="Bio"
-            name="bio"
-            error={""}
-            isTextarea={true}
+            label="Job Title"
+            name="job"
+            error={errors.job?.message}
             register={register}
           />
+          <Input label="Bio" name="bio" isTextarea={true} register={register} />
           <FormFooter>
             <Button btnType={BtnType.Submit}>Update</Button>
           </FormFooter>

@@ -52,7 +52,7 @@ const Register = () => {
         <Input
           label="Nickname"
           name="nickname"
-          error={""}
+          error={errors.nickname?.message}
           register={register}
           rules={{
             required: "This field is required",
@@ -61,7 +61,7 @@ const Register = () => {
         <Input
           label="Name"
           name="name"
-          error={""}
+          error={errors.name?.message}
           register={register}
           rules={{
             required: "This field is required",
@@ -70,7 +70,7 @@ const Register = () => {
         <Input
           label="Email"
           name="email"
-          error={""}
+          error={errors.email?.message}
           register={register}
           rules={{
             required: "This field is required",
@@ -80,7 +80,7 @@ const Register = () => {
           label="Password"
           name="password"
           fieldType="password"
-          error={""}
+          error={errors.password?.message}
           register={register}
           rules={{
             required: "This field is required",

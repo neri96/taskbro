@@ -50,7 +50,7 @@ const Login = () => {
         <Input
           label="Email"
           name="email"
-          error={""}
+          error={errors.email?.message}
           register={register}
           rules={{
             required: "This field is required",
@@ -60,7 +60,7 @@ const Login = () => {
           label="Password"
           name="password"
           fieldType="password"
-          error={""}
+          error={errors.password?.message}
           register={register}
           rules={{
             required: "This field is required",

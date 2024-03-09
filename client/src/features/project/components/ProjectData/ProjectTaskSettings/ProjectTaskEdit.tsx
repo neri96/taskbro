@@ -1,11 +1,6 @@
 import { useEffect } from "react";
 
-import {
-  useForm,
-  SubmitHandler,
-  Controller,
-  UseControllerReturn,
-} from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 
 import { useProjectEditMutation } from "../../../../../app/services/project";
 
@@ -74,17 +69,29 @@ const ProjectTaskEdit = ({
           <Input
             label="Title"
             name="title"
+            error={errors.title?.message}
             register={register}
             rules={{
+              maxLength: 150,
+              minLength: 3,
               required: "This field is required",
             }}
           />
           <Controller
             control={control}
             name="deadline"
-            rules={{ required: "This field is required" }}
+            rules={{
+              maxLength: 10,
+              minLength: 10,
+              required: "This field is required",
+            }}
             render={({ field: { onChange, value } }: any) => (
-              <Input label="Deadline" name="deadline" isDatePicker>
+              <Input
+                label="Deadline"
+                name="deadline"
+                isDatePicker
+                error={errors.deadline?.message}
+              >
                 <DatePicker
                   startDate={new Date()}
                   onChange={onChange}
@@ -99,7 +106,10 @@ const ProjectTaskEdit = ({
             name="description"
             register={register}
             isTextarea
+            error={errors.description?.message}
             rules={{
+              maxLength: 1000,
+              minLength: 50,
               required: "This field is required",
             }}
           />

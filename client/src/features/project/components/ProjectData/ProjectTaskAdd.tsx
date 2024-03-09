@@ -67,7 +67,7 @@ const ProjectTaskAdd = () => {
           <Input
             name="task"
             label="Task"
-            error={""}
+            error={errors.task?.message}
             register={register}
             rules={{
               required: "This field is required",
