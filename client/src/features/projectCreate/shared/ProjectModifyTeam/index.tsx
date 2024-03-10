@@ -1,4 +1,4 @@
-import { IUser } from "../../../../shared/interfaces/user.interface";
+import { IUser } from "../../../../app/services/user";
 
 const ProjectModifyTeam = ({ users }: { users: IUser[] }) => {
   return (

@@ -37,7 +37,7 @@ export const authApi = api.injectEndpoints({
       },
       invalidatesTags: ["Auth"],
     }),
-    logOut: build.mutation<string, void>({
+    logOut: build.mutation<string, {}>({
       query() {
         return {
           url: "/auth/logout",

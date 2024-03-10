@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, CSSProperties } from "react";
 
-import UserList from "../../../components/UserList";
+import UserList, { IUserList } from "../../../components/UserList";
 import Prev from "../shared/Prev";
 import Button from "../../../components/Button";
 import Icon from "../../../components/Icon";
@@ -9,8 +9,6 @@ import IcAdd from "../../../assets/icons/add2.svg";
 
 import styles from "./ProjectCreateTeam.module.scss";
 
-import { ITeamLocal } from "./ProjectCreateWizard";
-
 const ProjectCreateTeam = ({
   team,
   setTeam,
@@ -18,8 +16,8 @@ const ProjectCreateTeam = ({
   handlePrev,
   handleNext,
 }: {
-  team: ITeamLocal[];
-  setTeam: Dispatch<SetStateAction<ITeamLocal[]>>;
+  team: IUserList[];
+  setTeam: Dispatch<SetStateAction<IUserList[]>>;
   style: CSSProperties;
   handlePrev: () => void;
   handleNext: () => void;
@@ -39,15 +37,13 @@ const ProjectCreateTeam = ({
 
               return id;
             })}
-            handleModify={({ id, name }: { id: string; name: string }) =>
+            handleModify={({ id, name, nickname, image }: IUserList) =>
               setTeam((team) => {
-                console.log(id, team);
-
                 if (team.find((member) => member.id === id)) {
                   return team.filter(({ id: currentId }) => currentId !== id);
                 }
 
-                return [...team, { id, name }];
+                return [...team, { id, name, nickname, image }];
               })
             }
           />

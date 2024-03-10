@@ -7,6 +7,7 @@ import ProjectChat from "./ProjectChat";
 import ProjectData from "./ProjectData";
 import ProjectFiles from "./ProjectFiles";
 import ProjectTeam from "./ProjectTeam";
+import Loading from "../../../components/Loading";
 
 import styles from "./ProjectContainer.module.scss";
 
@@ -16,9 +17,9 @@ export const ProjectContainer = () => {
   const [currentPage, setCurrentPage] = useState<Pages>(Pages.Tasks);
   const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
 
-  const { data: projectData, isLoading, error } = useProjectData();
+  const { data: projectData, isLoading } = useProjectData();
 
-  if (isLoading || !projectData) return <h4>Loading...</h4>;
+  if (isLoading || !projectData) return <Loading />;
 
   return (
     <>

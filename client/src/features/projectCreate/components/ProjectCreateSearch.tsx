@@ -11,10 +11,9 @@ import { useLazySearchQuery } from "../../../app/services/user";
 
 import Prev from "../shared/Prev";
 import Input from "../../../components/Input";
-import UserList from "../../../components/UserList";
+import UserList, { IUserList } from "../../../components/UserList";
 
 import styles from "./ProjectCreateSearch.module.scss";
-import { ITeamLocal } from "./ProjectCreateWizard";
 
 const ProjectCreateSearch = ({
   team,
@@ -22,8 +21,8 @@ const ProjectCreateSearch = ({
   style,
   handlePrev,
 }: {
-  team: ITeamLocal[];
-  setTeam: Dispatch<SetStateAction<ITeamLocal[]>>;
+  team: IUserList[];
+  setTeam: Dispatch<SetStateAction<IUserList[]>>;
   style: CSSProperties;
   handlePrev: () => void;
 }) => {
@@ -51,17 +50,19 @@ const ProjectCreateSearch = ({
           ) => setUserName(e.target.value)}
         />
       </div>
-      <UserList
-        users={data}
-        target={team.map((member) => {
-          const { id } = member;
+      {data ? (
+        <UserList
+          users={data}
+          target={team.map((member) => {
+            const { id } = member;
 
-          return id;
-        })}
-        handleModify={(data: { id: string; name: string }) =>
-          setTeam((team) => [...team, data])
-        }
-      />
+            return id;
+          })}
+          handleModify={(input: IUserList) =>
+            setTeam((team) => [...team, input])
+          }
+        />
+      ) : null}
     </div>
   );
 };

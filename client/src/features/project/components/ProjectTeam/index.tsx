@@ -4,7 +4,8 @@ import ProjectTeamDetails from "./ProjectTeamDetails";
 import ProjectTeamKickout from "./ProjectTeamKickout";
 
 import styles from "./style.module.scss";
-import { IUser } from "../../../../shared/interfaces/user.interface";
+
+import { IUser } from "../../../../app/services/user";
 
 const ProjectTeam = ({ data }: { data: IUser[] }) => {
   const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false);

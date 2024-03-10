@@ -15,7 +15,7 @@ import Loading from "../../../components/Loading";
 
 import useUserData from "../../../hooks/useUserData";
 
-const socket = io("http://localhost:8000");
+const socket = io(import.meta.env.VITE_BASE_URL);
 
 const ProfileChat = ({
   isChatOpen,

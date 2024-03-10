@@ -6,7 +6,7 @@ export interface IFav {
   id: string;
   name: string;
   nickname: string;
-  image?: string;
+  image: string;
 }
 
 export interface IUser {

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
+
+import { useGetUserQuery } from "../../../app/services/user";
 
 import ProjectCreateForm from "./ProjectCreateForm";
 import ProjectCreateTeam from "./ProjectCreateTeam";
@@ -8,21 +10,27 @@ import ProjectCreateSearch from "./ProjectCreateSearch";
 
 import useWizard from "../../../hooks/useWizard";
 import useUserData from "../../../hooks/useUserData";
-import { IProjectInput } from "../../../shared/interfaces/project.interface";
 
-export interface ITeamLocal {
-  id: string;
-  name: string;
-}
+import { IProjectInput } from "../../../app/services/project";
+
+import { IUserList } from "../../../components/UserList";
 
 const ProjectCreateWizard = () => {
   const userData = useUserData();
+  const { data } = useGetUserQuery(userData.id);
 
-  const [team, setTeam] = useState<ITeamLocal[]>([
-    { id: userData.id, name: userData.name },
-  ]);
+  const [team, setTeam] = useState<IUserList[]>([]);
 
   const { parentStyle, childrenStyle, handlePrev, handleNext } = useWizard();
+
+  useEffect(() => {
+    if (data) {
+      // setting the creator as the first default member
+      const { id, name, nickname, image } = data;
+
+      setTeam((prevState) => [...prevState, { id, name, nickname, image }]);
+    }
+  }, [data]);
 
   const {
     control,

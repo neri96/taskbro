@@ -12,50 +12,55 @@ import styles from "./styles.module.scss";
 
 import { IFav, IUser } from "../../app/services/user";
 
-interface IHandleModifyInput {
+export interface IUserList {
   id: string;
-  name?: string;
+  name: string;
+  nickname: string;
+  image: string;
 }
-
 const UserList = ({
   users,
   target,
   handleModify,
 }: {
-  users: IUser[] | IFav[];
+  users: IUserList[] | IUser[] | IFav[];
   target: string[];
-  handleModify: (input: IHandleModifyInput) => void;
+  handleModify: (input: IUserList) => void;
 }) => {
   const { id: userId } = useUserData();
 
   return (
     <ul>
-      {users?.map(({ id, name, nickname, image }) => (
-        <li key={id} className={styles.userList}>
-          <Link to={`/user/${nickname}`}>
-            <div className={styles.userListData}>
-              <div className={styles.userListPic}>
-                <UserImage src={image} alt={name} round />
+      {users?.map((user) => {
+        const { id, name, nickname, image } = user;
+
+        return (
+          <li key={id} className={styles.userList}>
+            <Link to={`/user/${nickname}`}>
+              <div className={styles.userListData}>
+                <div className={styles.userListPic}>
+                  <UserImage src={image} alt={name} round />
+                </div>
+                <div className={styles.userListName}>
+                  <h4>{name}</h4>
+                </div>
               </div>
-              <div className={styles.userListName}>
-                <h4>{name}</h4>
+            </Link>
+            {id !== userId ? (
+              <div
+                className={styles.userListModify}
+                onClick={() => handleModify({ id, name, nickname, image })}
+              >
+                {target.includes(id) ? (
+                  <Icon src={IcMinus} alt="Remove" />
+                ) : (
+                  <Icon src={IcAdd} alt="Add" />
+                )}
               </div>
-            </div>
-          </Link>
-          {id !== userId ? (
-            <div
-              className={styles.userListModify}
-              onClick={() => handleModify({ id, name })}
-            >
-              {target.includes(id) ? (
-                <Icon src={IcMinus} alt="Remove" />
-              ) : (
-                <Icon src={IcAdd} alt="Add" />
-              )}
-            </div>
-          ) : null}
-        </li>
-      ))}
+            ) : null}
+          </li>
+        );
+      })}
     </ul>
   );
 };

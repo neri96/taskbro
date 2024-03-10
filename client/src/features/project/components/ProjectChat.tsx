@@ -19,7 +19,7 @@ import Loading from "../../../components/Loading";
 
 import styles from "./ProjectChat.module.scss";
 
-const socket = io("http://localhost:8000");
+const socket = io(import.meta.env.VITE_BASE_URL);
 
 const ProjectChat = ({
   chatId,

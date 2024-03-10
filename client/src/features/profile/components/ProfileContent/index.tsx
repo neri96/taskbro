@@ -10,7 +10,7 @@ import IcFavs from "../../../../assets/icons/friends.svg";
 
 import styles from "./style.module.scss";
 
-import { IUser } from "../../../../shared/interfaces/user.interface";
+import { IUser } from "../../../../app/services/user";
 
 const ProfileContent = ({
   data,
