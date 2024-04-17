@@ -60,11 +60,11 @@ const ProfileChat = ({
     });
   };
 
-  if (isLoading || !data) {
+  if (isLoading) {
     return <Loading />;
   }
 
-  return (
+  return data ? (
     <AnimElement
       isOpen={isChatOpen}
       style={{ position: "relative", minWidth: "400px" }}
@@ -93,7 +93,7 @@ const ProfileChat = ({
         }}
       />
     </AnimElement>
-  );
+  ) : null;
 };
 
 export default ProfileChat;

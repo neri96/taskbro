@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-
 import { useLogOutMutation } from "../../app/services/auth";
 import { useAppDispatch } from "../../app/store";
 
@@ -10,7 +8,6 @@ import Icon from "../Icon";
 import IcLogout from "../../assets/icons/logout.svg";
 
 const LogOut = () => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const [logOutMut] = useLogOutMutation();
@@ -20,7 +17,6 @@ const LogOut = () => {
       await logOutMut({}).unwrap();
 
       dispatch(logOut());
-      navigate("/auth");
     } catch (error) {
       throw error;
     }

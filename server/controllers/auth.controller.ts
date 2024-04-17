@@ -52,7 +52,7 @@ export const login = async (req: Request, res: Response) => {
     const { password: _pass, ...userData } = user.toObject();
 
     return res.status(200).json({
-      user: userData,
+      user: { ...userData, id: userData._id },
       token: accessToken,
     });
   } catch (error) {
@@ -106,15 +106,15 @@ export const register = async (req: Request, res: Response) => {
     );
 
     res.cookie("token", refreshToken, {
-      httpOnly: true, //accessible only by web server
-      secure: false, //https
-      maxAge: 7 * 24 * 60 * 60 * 1000, //cookie expiry: set to match rT
+      httpOnly: true,
+      secure: false,
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     const { password: _pass, ...userData } = newUser.toObject();
 
     return res.status(200).json({
-      user: userData,
+      user: { ...userData, id: userData._id },
       token: accessToken,
     });
   } catch (error) {

@@ -95,6 +95,7 @@ export const userApi = api.injectEndpoints({
 
 export const {
   useMeQuery,
+  useLazyMeQuery,
   useGetUserQuery,
   useEditMutation,
   useSearchQuery,

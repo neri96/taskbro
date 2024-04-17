@@ -12,7 +12,8 @@ interface IProps extends IUsers {
 }
 
 const Protected = ({ excluded, allowedUsers, children }: IProps) => {
-  const { id: myId } = useUserData() || {};
+  const userData = useUserData();
+  const { id: myId } = userData;
 
   if (excluded === myId) return null;
 

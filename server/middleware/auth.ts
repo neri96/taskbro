@@ -7,7 +7,6 @@ export default (req: Request, res: Response, next: NextFunction) => {
     const token = (req.headers.authentication as string)?.split(" ")[1];
 
     const userData = jwt.verify(token, process.env.ACCESS_SECRET_KEY as string);
-    console.log(userData);
 
     res.locals.userData = userData;
 

@@ -1,4 +1,5 @@
 import { ChangeEvent } from "react";
+import { useLocation } from "react-router-dom";
 
 import Protected from "../../../../../components/Protected";
 import ProfileHeaderMessage from "./ProfileHeaderMessage";
@@ -7,6 +8,8 @@ import UserImage from "../../../../../components/UserImage";
 import Icon from "../../../../../components/Icon";
 
 import IcUpload from "../../../../../assets/icons/upload.svg";
+
+import useUserData from "../../../../../hooks/useUserData";
 
 import { useChangeImageMutation } from "../../../../../app/services/user";
 
@@ -23,6 +26,13 @@ const ProfileHeader = ({
   image: string;
   isFetching: boolean;
 }) => {
+  const location = useLocation();
+  const nickname = location.pathname.split("/")[2];
+
+  const userData = useUserData();
+
+  const isItMe = nickname === userData.nickname;
+
   const [changeImage] = useChangeImageMutation();
 
   const handleSelectFile = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -47,9 +57,11 @@ const ProfileHeader = ({
   return (
     <div className={styles.profileHeader}>
       <div className={styles.profileHeaderContent}>
-        <Protected excluded={userId}>
-          <ProfileHeaderFav userId={userId} />
-        </Protected>
+        {isItMe ? null : (
+          <Protected excluded={userId}>
+            <ProfileHeaderFav userId={userId} />
+          </Protected>
+        )}
         <div className={styles.profilePicture}>
           {!isFetching ? <UserImage src={image} alt={name} /> : null}
 
@@ -74,9 +86,11 @@ const ProfileHeader = ({
             </div>
           </Protected>
         </div>
-        <Protected excluded={userId}>
-          <ProfileHeaderMessage />
-        </Protected>
+        {isItMe ? null : (
+          <Protected excluded={userId}>
+            <ProfileHeaderMessage />
+          </Protected>
+        )}
       </div>
     </div>
   );
