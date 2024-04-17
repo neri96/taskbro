@@ -23,7 +23,7 @@ const UserList = ({
   target,
   handleModify,
 }: {
-  users: IUserList[] | IUser[] | IFav[];
+  users: IUserList[] | IUser[] | IFav[] | undefined;
   target: string[];
   handleModify: (input: IUserList) => void;
 }) => {
@@ -39,10 +39,10 @@ const UserList = ({
             <Link to={`/user/${nickname}`}>
               <div className={styles.userListData}>
                 <div className={styles.userListPic}>
-                  <UserImage src={image} alt={name} round />
+                  <UserImage src={image} alt={nickname} round />
                 </div>
                 <div className={styles.userListName}>
-                  <h4>{name}</h4>
+                  <h4>{nickname}</h4>
                 </div>
               </div>
             </Link>

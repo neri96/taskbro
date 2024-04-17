@@ -23,7 +23,7 @@ const ProfileContent = ({
   isFetching: boolean;
   handleFavList: () => void;
 }) => {
-  const { id, name, job, bio, image } = data || {};
+  const { id, nickname, name, job, bio, image } = data || {};
 
   return (
     <div className={styles.profileContent}>
@@ -55,11 +55,14 @@ const ProfileContent = ({
             image={image}
             isFetching={isFetching}
           />
+          <div className={styles.profileNickname}>
+            <h1>{nickname}</h1>
+          </div>
           <div className={styles.profileName}>
-            <h1>{name}</h1>
+            <h3>{name}</h3>
           </div>
           {job ? (
-            <div className={styles.profileName}>
+            <div className={styles.profileJob}>
               <h4>{job}</h4>
             </div>
           ) : null}

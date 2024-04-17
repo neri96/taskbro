@@ -26,10 +26,10 @@ const ProfileFavList = ({
 
   const { id: userId, favorites } = data || {};
 
-  return favorites?.length ? (
+  return searchList?.length || favorites?.length ? (
     <UserList
       users={userName.length >= 2 && searchList ? searchList : favorites}
-      target={favorites.map((fav: IFav) => {
+      target={(favorites || searchList || []).map((fav: IFav) => {
         const { id } = fav;
 
         return id;

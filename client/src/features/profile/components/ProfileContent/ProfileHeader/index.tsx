@@ -19,7 +19,6 @@ const ProfileHeader = ({
   userId,
   name,
   image,
-  isFetching,
 }: {
   userId: string;
   name: string;
@@ -63,7 +62,7 @@ const ProfileHeader = ({
           </Protected>
         )}
         <div className={styles.profilePicture}>
-          {!isFetching ? <UserImage src={image} alt={name} /> : null}
+          <UserImage src={image} alt={name} />
 
           <Protected allowedUsers={[userId]}>
             <div className={styles.profileNewPic}>

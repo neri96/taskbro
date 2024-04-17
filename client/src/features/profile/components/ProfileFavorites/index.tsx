@@ -27,7 +27,7 @@ const ProfileFavorites = ({
   const [searchUsers, { data }] = useLazySearchQuery();
 
   useEffect(() => {
-    if (userName.length >= 2) {
+    if (userName.length >= 3) {
       searchUsers(userName);
     }
   }, [userName]);

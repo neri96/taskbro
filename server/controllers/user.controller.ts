@@ -119,9 +119,10 @@ export const modifyFavList = async (req: Request, res: Response) => {
 
 export const search = async (req: Request, res: Response) => {
   const { searchName } = req.query;
+
   try {
     const users = await User.find({
-      name: { $regex: searchName, $options: "i" },
+      nickname: { $regex: searchName, $options: "i" },
     }).select("-password");
 
     for (const user of users) {
