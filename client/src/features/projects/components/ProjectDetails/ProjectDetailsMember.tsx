@@ -19,7 +19,7 @@ const ProjectDetailsMember = ({ data }: { data: IProps }) => {
       <UserImage
         src={image}
         alt={name}
-        toolTip={{ content: name }}
+        toolTip={{ content: nickname }}
         round
         link={`/user/${nickname}`}
       />

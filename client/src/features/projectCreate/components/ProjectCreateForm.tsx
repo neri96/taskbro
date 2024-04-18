@@ -141,7 +141,6 @@ const ProjectCreateForm = ({
       <Input
         label="Team"
         name="team"
-        error={""}
         register={register}
         readonly
         rules={{

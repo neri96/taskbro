@@ -102,7 +102,11 @@ export const projectApi = api.injectEndpoints({
     }),
     projectComplete: build.mutation<
       { completed: boolean },
-      { projectId: string; isCurrentlyCompleted: boolean }
+      {
+        projectId: string;
+        isCurrentlyCompleted: boolean;
+        cancelAllTasks?: boolean;
+      }
     >({
       query(body) {
         return {

@@ -13,6 +13,7 @@ const Input = ({
   label,
   value,
   style,
+  parentStyle,
   error,
   placeholder,
   isTextarea,
@@ -37,6 +38,7 @@ const Input = ({
   value?: string;
   error?: string;
   style?: CSSProperties;
+  parentStyle?: CSSProperties;
   readonly?: boolean;
   placeholder?: string;
   isTextarea?: boolean;
@@ -52,8 +54,9 @@ const Input = ({
   children?: ReactNode;
 }) => {
   const Component = isTextarea ? "textarea" : "input";
+
   return (
-    <div className={styles.field}>
+    <div className={styles.field} style={parentStyle}>
       {label ? <label htmlFor={name}>{label}</label> : null}
       {error ? <span className={styles.fieldError}>{error}</span> : null}
       {isDatePicker ? (

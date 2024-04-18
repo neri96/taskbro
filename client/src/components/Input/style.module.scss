@@ -18,6 +18,18 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     background-color: #ccc;
     margin-bottom: 15px;
+    &::placeholder {
+      padding-left: 10px;
+      box-sizing: border-box;
+    }
+    &::-moz-placeholder {
+      padding-left: 10px;
+      box-sizing: border-box;
+    }
+    &::-webkit-placeholder {
+      padding-left: 10px;
+      box-sizing: border-box;
+    }
   }
 
   input {

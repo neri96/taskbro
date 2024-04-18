@@ -41,7 +41,7 @@ const ProjectCreateWizard = () => {
   } = useForm<IProjectInput>();
 
   useEffect(() => {
-    const result = team.map(({ name }) => name).join(", ");
+    const result = team.map(({ nickname }) => nickname).join(", ");
 
     setValue("team", result);
   }, [team]);

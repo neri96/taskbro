@@ -1,11 +1,11 @@
 import { CSSProperties, useState } from "react";
+import { Link } from "react-router-dom";
 
 import Tooltip from "../Tooltip";
 
 import ImgProfilePic from "../../assets/generic-pp.png";
 
 import styles from "./style.module.scss";
-import { Link } from "react-router-dom";
 
 interface ITooltip {
   content: string;

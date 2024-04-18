@@ -22,6 +22,7 @@ const ProjectTaskComplete = () => {
       await projectComplete({
         projectId: id,
         isCurrentlyCompleted: isProjectCompleted,
+        cancelAllTasks: true,
       });
     }
   };

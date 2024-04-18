@@ -1,0 +1,16 @@
+.mfNewsletter {
+  display: flex;
+  align-items: center;
+  width: clamp(30%, 400px, 500px);
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+// MADIA //
+
+@media screen and (max-width: 780px) {
+  .mfNewsletter {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

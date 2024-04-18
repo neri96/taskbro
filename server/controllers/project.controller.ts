@@ -64,6 +64,7 @@ export const getAll = async (req: Request, res: Response) => {
     }
 
     const projects = await Project.find(config)
+      .sort({ createdAt: -1 })
       .populate("manager")
       .populate({ path: "team", select: "_id name nickname image" });
 
@@ -120,8 +121,14 @@ export const create = async (req: Request, res: Response) => {
     newProject.chat = chat._id;
 
     await new Notification({
+      to: [manager],
+      message: `You have created a project named ${title}. Let's roll!`,
+      readBy: [],
+    }).save();
+
+    await new Notification({
       to: newProject.team,
-      message: `You have added to project ${title}`,
+      message: `You have been added to project ${title}`,
       readBy: [],
     }).save();
 
@@ -188,8 +195,8 @@ export const modifyTask = async (req: Request, res: Response) => {
         (task: { _id: string; completed: boolean }) =>
           String(task._id) === taskId
       )?.completed,
-      isFinished: data?.tasks.some(
-        (task: { _id: string; completed: boolean }) => !task.completed
+      isFinished: data?.tasks.every(
+        (task: { _id: string; completed: boolean }) => task.completed
       ),
     };
 
@@ -200,19 +207,23 @@ export const modifyTask = async (req: Request, res: Response) => {
 };
 
 export const complete = async (req: Request, res: Response) => {
-  const { projectId, isCurrentlyCompleted } = req.body;
+  const { projectId, isCurrentlyCompleted, cancelAllTasks } = req.body;
 
   try {
-    const data = await Project.findOneAndUpdate(
-      { _id: projectId },
-      {
-        completed: !isCurrentlyCompleted,
-        $set: {
-          "tasks.$[].completed": isCurrentlyCompleted ? false : true,
-        },
-      },
-      { new: true }
-    );
+    const config: {
+      completed: boolean;
+      $set?: { "tasks.$[].completed": boolean };
+    } = { completed: !isCurrentlyCompleted };
+
+    if (cancelAllTasks) {
+      config["$set"] = {
+        "tasks.$[].completed": isCurrentlyCompleted ? false : true,
+      };
+    }
+
+    const data = await Project.findOneAndUpdate({ _id: projectId }, config, {
+      new: true,
+    });
 
     if (data) {
       await new Notification({

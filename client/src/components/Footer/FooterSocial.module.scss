@@ -1,0 +1,17 @@
+.mfIcons {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+// MEDIA //
+
+@media screen and (max-width: 780px) {
+  .mfIcons {
+    margin-bottom: 10px;
+    padding: 0 10px;
+    justify-content: flex-start;
+  }
+}

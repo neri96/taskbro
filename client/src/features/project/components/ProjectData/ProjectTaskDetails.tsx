@@ -16,13 +16,14 @@ import useProjectData from "../../hooks/useProjectData";
 
 import styles from "./ProjectTaskDetails.module.scss";
 
-const ProjectTaskDetails = ({ data }: { data: ITask }) => {
-  const { data: projectData } = useProjectData();
+const ProjectTaskDetails = ({ data: taskData }: { data: ITask }) => {
   const projectComplete = useProjectComplete();
 
-  const { task, completed, _id: taskId } = data;
+  const { data: projectData } = useProjectData();
+  const { task, completed: isTaskCompleted, _id: taskId } = taskData;
 
   const [taskModify] = useProjectTaskModifyMutation();
+  console.log(isTaskCompleted);
 
   const handleChange = async () => {
     const { id, completed: isProjectCompleted } = projectData || {};
@@ -32,7 +33,7 @@ const ProjectTaskDetails = ({ data }: { data: ITask }) => {
         const result = await taskModify({
           projectId: id,
           taskId,
-          isCurrentlyCompleted: completed,
+          isCurrentlyCompleted: isTaskCompleted,
         }).unwrap();
 
         if (result.isTaskCompleted) {
@@ -42,6 +43,7 @@ const ProjectTaskDetails = ({ data }: { data: ITask }) => {
             await projectComplete({
               projectId: id,
               isCurrentlyCompleted: false,
+              cancelAllTasks: false,
             });
           }
         } else {
@@ -51,6 +53,7 @@ const ProjectTaskDetails = ({ data }: { data: ITask }) => {
             await projectComplete({
               projectId: id,
               isCurrentlyCompleted: true,
+              cancelAllTasks: false,
             });
           }
         }
@@ -63,11 +66,11 @@ const ProjectTaskDetails = ({ data }: { data: ITask }) => {
   return (
     <div
       className={classnames(styles.ptDetails, {
-        [styles.completed]: completed,
+        [styles.completed]: isTaskCompleted,
       })}
     >
       <AnimElement
-        isOpen={completed}
+        isOpen={isTaskCompleted}
         style={{
           margin: " 0 6px",
           position: "absolute",
@@ -81,7 +84,7 @@ const ProjectTaskDetails = ({ data }: { data: ITask }) => {
       <input
         type="checkbox"
         id={taskId}
-        checked={completed}
+        checked={isTaskCompleted}
         onChange={handleChange}
       />
       <label htmlFor={taskId}>{task}</label>

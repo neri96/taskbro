@@ -13,6 +13,9 @@ export const getAll = async (req: Request, res: Response) => {
       });
 
     const notReadQty = await Notification.countDocuments({
+      to: {
+        $in: [id],
+      },
       readBy: {
         $nin: [id],
       },

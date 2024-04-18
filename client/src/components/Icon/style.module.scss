@@ -1,7 +1,9 @@
 .icon {
-  height: 25px;
   cursor: pointer;
   position: relative;
+  &.fixedHeight {
+    height: 25px;
+  }
   img {
     height: 100%;
   }
