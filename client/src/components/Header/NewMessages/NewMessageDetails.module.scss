@@ -1,0 +1,25 @@
+.nmDetails {
+  height: 40px;
+  width: 100%;
+  display: flex;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.nmDetailsImg {
+  height: 40px;
+  width: 40px;
+}
+
+.nmDetailsContent {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+  flex: 1;
+  p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

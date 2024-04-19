@@ -1,5 +1,6 @@
 import { createContext } from "react";
 import { SelectedFile } from "../ts/types";
+import { IPrivate } from "../app/services/chat";
 
 export const ProjectCreateCtx = createContext<{
   toggleModal: null | (() => void);
@@ -30,4 +31,10 @@ export const ProjectTaskChatCtx = createContext<{
 }>({
   isChatOpen: false,
   handleChatVisib: null,
+});
+
+export const NewMessageDataCtx = createContext<{
+  data: IPrivate[];
+}>({
+  data: [],
 });

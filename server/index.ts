@@ -53,6 +53,10 @@ io.on("connection", (socket) => {
     socket.join(chat);
   });
 
+  socket.on("join_user", (id) => {
+    socket.join(id);
+  });
+
   socket.on("send", (data) => {
     socket.to(data.chat).emit("get_message", data);
   });
@@ -63,6 +67,7 @@ io.on("connection", (socket) => {
 
   socket.on("send_private", (data) => {
     socket.to(data.chat).emit("get_private_message", data);
+    socket.to(data.to).emit("get_new_private_message", data);
   });
 });
 

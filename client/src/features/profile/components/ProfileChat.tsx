@@ -6,9 +6,9 @@ import io from "socket.io-client";
 import {
   usePrivateMessagesQuery,
   useLazyPrivateMessagesQuery,
+  useReadPrivateMsgsMutation,
 } from "../../../app/services/chat";
 
-import AnimElement from "../../../components/AnimElement";
 import CloseSidebar, { ClosePosition } from "../../../components/CloseSidebar";
 import Chat from "../../../components/Chat";
 import Loading from "../../../components/Loading";
@@ -18,11 +18,9 @@ import useUserData from "../../../hooks/useUserData";
 const socket = io(import.meta.env.VITE_BASE_URL);
 
 const ProfileChat = ({
-  isChatOpen,
   companionId,
   handleChatVisibility,
 }: {
-  isChatOpen: boolean;
   companionId: string;
   handleChatVisibility: () => void;
 }) => {
@@ -35,7 +33,9 @@ const ProfileChat = ({
     { skip: !userId || !companionId }
   );
 
-  const chatId = userId + companionId;
+  const chatId = [userId, companionId]
+    .sort((a, b) => parseInt(a, 16) - parseInt(b, 16))
+    .join(""); // for users to be able to receive messages from each other they both must have a unique chat id, so here I used a value that includes ids of both participants and will be the regardless of order
 
   const [getMessages] = useLazyPrivateMessagesQuery();
 
@@ -49,12 +49,39 @@ const ProfileChat = ({
     });
   }, [socket]);
 
+  // Reading messsages once chat is open
+
+  const [readMessages] = useReadPrivateMsgsMutation();
+
+  useEffect(() => {
+    if (data) {
+      const unreadMsgs = ((): string[] => {
+        const result = [];
+
+        for (const message of data) {
+          const { id, read } = message;
+
+          if (!read && userData.id === message.to.id) result.push(id);
+        }
+
+        return result;
+      })();
+
+      if (unreadMsgs.length) {
+        readMessages({ msgIds: unreadMsgs });
+      }
+    }
+  }, [data]);
+
+  //
+
   const sendMessage = (content: string) => {
     const { name, image } = userData;
 
     socket.emit("send_private", {
       id: uuid(),
       from: { name, image },
+      to: companionId,
       content,
       chat: chatId,
     });
@@ -65,13 +92,10 @@ const ProfileChat = ({
   }
 
   return data ? (
-    <AnimElement
-      isOpen={isChatOpen}
-      style={{ position: "relative", minWidth: "400px" }}
-    >
+    <>
       <CloseSidebar
         position={ClosePosition.Left}
-        isSidebarOpen={isChatOpen}
+        isSidebarOpen
         handleSidebar={handleChatVisibility}
       />
       <Chat
@@ -92,7 +116,7 @@ const ProfileChat = ({
           right: 0,
         }}
       />
-    </AnimElement>
+    </>
   ) : null;
 };
 

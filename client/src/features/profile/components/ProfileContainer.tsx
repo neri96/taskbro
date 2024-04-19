@@ -2,18 +2,24 @@ import { useEffect, useState } from "react";
 
 import { useLocation } from "react-router-dom";
 
+import { useAppDispatch, useTypedSelector } from "../../../app/store";
+import { setIsChatOpen, selectChatVisibility } from "../../../app/globalSlice";
+
 import { useGetUserQuery } from "../../../app/services/user";
 import useUserData from "../../../hooks/useUserData";
 
 import ProfileFavorites from "./ProfileFavorites";
 import ProfileContent from "./ProfileContent";
 import ProfileChat from "./ProfileChat";
+import AnimElement from "../../../components/AnimElement";
 import Loading from "../../../components/Loading";
 
 import { ProfileChatStatusCtx } from "../../../context";
 
 export const ProfileContainer = () => {
-  const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+
+  const isChatOpen = useTypedSelector(selectChatVisibility);
   const [isFavListOpen, setIsFavListOpen] = useState<boolean>(false);
 
   const location = useLocation();
@@ -21,12 +27,13 @@ export const ProfileContainer = () => {
 
   const { nickname: me } = useUserData();
   const userData = useGetUserQuery(userNickname);
+  console.log(isChatOpen);
 
   useEffect(() => {
-    if (me === userNickname) setIsChatOpen(false);
+    if (me === userNickname) dispatch(setIsChatOpen(false));
   }, [userNickname, me]);
 
-  const handleChatVisibility = () => setIsChatOpen((prevState) => !prevState);
+  const handleChatVisibility = () => dispatch(setIsChatOpen());
 
   const { data, isLoading, isFetching } = userData;
 
@@ -59,11 +66,15 @@ export const ProfileContainer = () => {
           handleFavList={() => setIsFavListOpen((prevState) => !prevState)}
         />
       </ProfileChatStatusCtx.Provider>
-      <ProfileChat
-        isChatOpen={isChatOpen}
-        companionId={data.id}
-        handleChatVisibility={handleChatVisibility}
-      />
+      <AnimElement
+        isOpen={isChatOpen}
+        style={{ position: "relative", minWidth: "400px" }}
+      >
+        <ProfileChat
+          companionId={data.id}
+          handleChatVisibility={handleChatVisibility}
+        />
+      </AnimElement>
     </div>
   );
 };

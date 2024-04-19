@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from "react";
+import { CSSProperties, ReactNode, MouseEvent } from "react";
 
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -10,7 +10,7 @@ const AnimElement = ({
 }: {
   isOpen: boolean;
   children: ReactNode;
-  handleClick?: () => void;
+  handleClick?: (e?: MouseEvent<HTMLUnknownElement>) => void;
   style?: CSSProperties;
 }) => {
   return (

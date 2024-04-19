@@ -22,6 +22,7 @@ export interface IPrivate {
   id: string;
   to: ICompanion;
   from: ICompanion;
+  read: boolean;
   content: string;
   createdAt: string;
   updatedAt: string;
@@ -53,6 +54,26 @@ export const chatApi = api.injectEndpoints({
       },
       providesTags: ["Chat"],
     }),
+    newPrivateMessage: build.query<IPrivate[], string>({
+      query(userId) {
+        return {
+          url: "/chat/new-private-messages",
+          method: "GET",
+          params: { userId },
+        };
+      },
+      providesTags: ["Chat"],
+    }),
+    readPrivateMsgs: build.mutation<string, { msgIds: string[] }>({
+      query(body) {
+        return {
+          url: "/chat/read-private-messages",
+          method: "POST",
+          body,
+        };
+      },
+      invalidatesTags: ["Chat"],
+    }),
     createMessage: build.mutation<string, IMessageInput>({
       query(body) {
         return {
@@ -69,7 +90,10 @@ export const chatApi = api.injectEndpoints({
 export const {
   useMessagesQuery,
   usePrivateMessagesQuery,
+  useNewPrivateMessageQuery,
+  useLazyNewPrivateMessageQuery,
   useLazyMessagesQuery,
   useLazyPrivateMessagesQuery,
+  useReadPrivateMsgsMutation,
   useCreateMessageMutation,
 } = chatApi;

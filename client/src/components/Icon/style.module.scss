@@ -1,6 +1,7 @@
 .icon {
   cursor: pointer;
   position: relative;
+  z-index: 100;
   &.fixedHeight {
     height: 25px;
   }

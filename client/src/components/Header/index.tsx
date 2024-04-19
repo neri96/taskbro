@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import UserImage from "../UserImage";
 import ProjectCreate from "../../features/projectCreate/components/ProjectCreate";
 import Notification from "../../features/notifications/components/Notification";
+import NewMessages from "./NewMessages";
 import LogOut from "./LogOut";
 
 import MainIcon from "../../assets/main-icon.svg";
@@ -41,6 +42,9 @@ const Header = () => {
             </li>
             <li className={styles.mainHeaderItem}>
               <Notification />
+            </li>
+            <li className={styles.mainHeaderItem}>
+              <NewMessages />
             </li>
             <li className={styles.mainHeaderItem}>
               <LogOut />

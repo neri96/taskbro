@@ -10,6 +10,7 @@ const Icon = ({
   fixedHeight = true,
   style,
   handleClick,
+  handleToggle,
   children,
 }: {
   src: string;
@@ -17,6 +18,7 @@ const Icon = ({
   fixedHeight?: boolean;
   style?: CSSProperties;
   handleClick?: () => void;
+  handleToggle?: () => void;
   children?: ReactNode;
 }) => {
   return (
@@ -26,6 +28,8 @@ const Icon = ({
       })}
       style={style}
       onClick={handleClick}
+      onMouseEnter={handleToggle}
+      onMouseLeave={handleToggle}
     >
       <img src={src} alt={alt} />
       {children}

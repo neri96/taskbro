@@ -20,7 +20,6 @@ const Notification = () => {
   const { data, isLoading } = useGetNotifsQuery(id, { skip: !id });
 
   const { notifications, notReadQty } = data || {};
-  console.log(data);
 
   return (
     <>

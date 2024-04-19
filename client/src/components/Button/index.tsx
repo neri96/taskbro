@@ -1,4 +1,4 @@
-import { ReactNode, CSSProperties } from "react";
+import { ReactNode, CSSProperties, MouseEvent } from "react";
 
 import classname from "classnames";
 
@@ -28,7 +28,7 @@ const Button = ({
   color?: BtnColor;
   disabled?: boolean;
   style?: CSSProperties;
-  handleClick?: () => void;
+  handleClick?: (e?: MouseEvent<HTMLUnknownElement>) => void;
 }) => {
   return (
     <button
