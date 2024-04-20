@@ -2,8 +2,7 @@ import { Request, Response } from "express";
 
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
-
-import { setImgUrl } from "../utils/s3";
+import sharp from "sharp";
 
 import User from "../models/user.model";
 
@@ -49,10 +48,6 @@ export const me = async (req: Request, res: Response) => {
       { expiresIn: "15m" }
     );
 
-    if (foundUser.image) {
-      await setImgUrl(foundUser);
-    }
-
     return res.status(200).json({
       user: foundUser,
       token: accessToken,
@@ -69,17 +64,6 @@ export const getOne = async (req: Request, res: Response) => {
     const user = await User.findOne({ nickname })
       .select("-password")
       .populate("favorites", "id name nickname image job bio");
-
-    if (user?.image) {
-      await setImgUrl(user);
-    }
-
-    if (user?.favorites)
-      for (const fav of user.favorites) {
-        if (fav.image) {
-          await setImgUrl(fav);
-        }
-      }
 
     return res.status(202).json(user);
   } catch (error) {
@@ -125,12 +109,6 @@ export const search = async (req: Request, res: Response) => {
       nickname: { $regex: searchName, $options: "i" },
     }).select("-password");
 
-    for (const user of users) {
-      if (user.image) {
-        await setImgUrl(user);
-      }
-    }
-
     return res.status(200).json(users);
   } catch (error) {
     console.log(error);
@@ -147,11 +125,21 @@ export const changeImage = async (
 
   try {
     if (req.file) {
+      const fileBuffer = await sharp(req.file.buffer)
+        .resize({ width: 180 })
+        .webp({ quality: 80 })
+        .toBuffer();
+
       const imgName = crypto.randomBytes(32).toString("hex");
 
-      await addFile(imgName, req.file.buffer, req.file.mimetype);
+      await addFile(imgName, fileBuffer, "image/webp");
 
-      await User.findByIdAndUpdate({ _id: id }, { image: imgName });
+      await User.findByIdAndUpdate(
+        { _id: id },
+        {
+          image: `https://${process.env.S3_BUCKET_NAME}.s3.${process.env.S3_BUCKET_REGION}.amazonaws.com/${imgName}`,
+        }
+      );
 
       return res.status(200).json("Successfully changed main image");
     }

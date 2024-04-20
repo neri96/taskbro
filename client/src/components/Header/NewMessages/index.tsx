@@ -35,10 +35,7 @@ const NewMessage = () => {
 
   useEffect(() => {
     socket.on("get_new_private_message", async () => {
-      console.log("socket worked");
-
-      const x = await getNewMessages(id).unwrap();
-      console.log(x);
+      await getNewMessages(id).unwrap();
     });
   }, [socket]);
 

@@ -14,7 +14,6 @@ const ChatMessage = ({ data, userId }: { data: IMessage; userId: string }) => {
     from: { id, name, image },
     createdAt,
   } = data;
-  // console.log(moment(createdAt).isAfter(moment().subtract(12, "hours")));
 
   return (
     <div

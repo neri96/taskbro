@@ -64,7 +64,6 @@ const Input = ({
       ) : (
         <>
           <Component
-            id={name}
             type={fieldType}
             value={value}
             placeholder={placeholder}

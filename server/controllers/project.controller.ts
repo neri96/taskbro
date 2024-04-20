@@ -11,7 +11,7 @@ import Notification from "../models/notification.model";
 
 import crypto from "crypto";
 
-import { getFileUrl, addFile, setImgUrl } from "../utils/s3";
+import { getFileUrl, addFile } from "../utils/s3";
 
 export const getOne = async (req: Request, res: Response) => {
   const { id: uid } = req.query;
@@ -21,13 +21,6 @@ export const getOne = async (req: Request, res: Response) => {
       "team",
       "id name nickname image"
     );
-
-    if (project?.team)
-      for (const member of project.team) {
-        if (member.image) {
-          await setImgUrl(member);
-        }
-      }
 
     if (project?.files)
       for (const file of project.files) {
@@ -67,25 +60,6 @@ export const getAll = async (req: Request, res: Response) => {
       .sort({ createdAt: -1 })
       .populate("manager")
       .populate({ path: "team", select: "_id name nickname image" });
-
-    const images: any = {};
-
-    for (let i = 0; i < projects.length; i++) {
-      const { team } = projects[i];
-
-      for (let j = 0; j < team.length; j++) {
-        const member = team[j];
-
-        const { _id } = member;
-
-        if (images[String(_id)]) {
-          member.image = images[_id];
-        } else if (member.image) {
-          await setImgUrl(member);
-          images[_id] = member.image;
-        }
-      }
-    }
 
     return res.status(200).json(projects);
   } catch (error) {

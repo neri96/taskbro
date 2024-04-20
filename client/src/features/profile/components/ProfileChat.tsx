@@ -11,7 +11,6 @@ import {
 
 import CloseSidebar, { ClosePosition } from "../../../components/CloseSidebar";
 import Chat from "../../../components/Chat";
-import Loading from "../../../components/Loading";
 
 import useUserData from "../../../hooks/useUserData";
 
@@ -88,7 +87,7 @@ const ProfileChat = ({
   };
 
   if (isLoading) {
-    return <Loading />;
+    return null;
   }
 
   return data ? (

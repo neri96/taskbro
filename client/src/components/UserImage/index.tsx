@@ -46,6 +46,7 @@ const UserImage = ({
           borderRadius: round ? "50%" : "5px",
         }}
         src={src || ImgProfilePic}
+        loading="lazy"
         alt={alt}
       />
 

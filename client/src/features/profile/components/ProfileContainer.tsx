@@ -68,7 +68,13 @@ export const ProfileContainer = () => {
       </ProfileChatStatusCtx.Provider>
       <AnimElement
         isOpen={isChatOpen}
-        style={{ position: "relative", minWidth: "400px" }}
+        style={{
+          minWidth: "400px",
+          height: "100%",
+          position: "absolute",
+          top: "0",
+          right: "0",
+        }}
       >
         <ProfileChat
           companionId={data.id}

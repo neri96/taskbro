@@ -3,8 +3,6 @@ import { Request, Response } from "express";
 import Chat from "../models/chat.model";
 import Message from "../models/message.model";
 
-import { setImgUrl } from "../utils/s3";
-
 export const getChat = async (req: Request, res: Response) => {
   const { id } = req.query;
 
@@ -33,21 +31,6 @@ export const getNewPrivateMessages = async (req: Request, res: Response) => {
       })
       .limit(5);
 
-    const images: any = {};
-
-    for (let i = 0; i < messages.length; i++) {
-      const msg = messages[i];
-      const user = msg.from;
-      const { _id } = user;
-
-      if (images[String(_id)]) {
-        user.image = images[_id];
-      } else if (user.image) {
-        await setImgUrl(user);
-        images[_id] = user.image;
-      }
-    }
-
     return res.status(200).json(messages);
   } catch (error) {
     console.log(error);
@@ -75,7 +58,6 @@ export const readPrivateMsgs = async (req: Request, res: Response) => {
 
 export const getMessages = async (req: Request, res: Response) => {
   const { id: chat } = req.query;
-  console.log(chat);
 
   try {
     const messages = await Message.find({ chat })
@@ -84,21 +66,6 @@ export const getMessages = async (req: Request, res: Response) => {
       .sort({
         createdAt: -1,
       });
-
-    const images: any = {};
-
-    for (let i = 0; i < messages.length; i++) {
-      const msg = messages[i];
-      const user = msg.from;
-      const { _id } = user;
-
-      if (images[String(_id)]) {
-        user.image = images[_id];
-      } else if (user.image) {
-        await setImgUrl(user);
-        images[_id] = user.image;
-      }
-    }
 
     return res.status(200).json(messages);
   } catch (error) {
@@ -146,27 +113,6 @@ export const getPrivateMessages = async (req: Request, res: Response) => {
       .sort({
         createdAt: -1,
       });
-
-    const images: any = {};
-    const imgAssign = async (data: any) => {
-      const { _id } = data;
-
-      if (images[String(_id)]) {
-        data.image = images[_id];
-      } else if (data.image) {
-        await setImgUrl(data);
-        images[_id] = data.image;
-      }
-    };
-
-    for (let i = 0; i < messages.length; i++) {
-      const msg = messages[i];
-      const userTo = msg.to;
-      const userFrom = msg.from;
-
-      await imgAssign(userTo);
-      await imgAssign(userFrom);
-    }
 
     return res.status(200).json(messages);
   } catch (error) {

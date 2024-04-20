@@ -5,8 +5,6 @@ import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-import { setImgUrl } from "../utils/s3";
-
 import User from "../models/user.model";
 
 export const login = async (req: Request, res: Response) => {
@@ -50,10 +48,6 @@ export const login = async (req: Request, res: Response) => {
       secure: false,
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
-
-    if (user.image) {
-      await setImgUrl(user);
-    }
 
     const { password: _pass, ...userData } = user.toObject();
 
@@ -116,10 +110,6 @@ export const register = async (req: Request, res: Response) => {
       secure: false,
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
-
-    if (newUser.image) {
-      await setImgUrl(user);
-    }
 
     const { password: _pass, ...userData } = newUser.toObject();
 
