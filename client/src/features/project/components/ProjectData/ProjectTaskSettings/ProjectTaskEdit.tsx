@@ -56,7 +56,7 @@ const ProjectTaskEdit = ({
 
       handleToggleEdit();
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 

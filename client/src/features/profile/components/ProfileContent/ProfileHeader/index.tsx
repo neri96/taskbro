@@ -49,7 +49,7 @@ const ProfileHeader = ({
     try {
       await changeImage(formData).unwrap();
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 
