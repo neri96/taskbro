@@ -27,7 +27,6 @@ export const ProfileContainer = () => {
 
   const { nickname: me } = useUserData();
   const userData = useGetUserQuery(userNickname);
-  console.log(isChatOpen);
 
   useEffect(() => {
     if (me === userNickname) dispatch(setIsChatOpen(false));

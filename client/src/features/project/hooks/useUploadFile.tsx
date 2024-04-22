@@ -15,7 +15,7 @@ const useUploadFile = () => {
     try {
       await addFiles(formData).unwrap();
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 

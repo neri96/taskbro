@@ -63,7 +63,6 @@ io.on("connection", (socket) => {
 
   socket.on("join_private", (chat) => {
     socket.join(chat);
-    console.log("joined");
   });
 
   socket.on("send_private", (data) => {

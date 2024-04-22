@@ -10,7 +10,6 @@ interface IProps {
 
 const Wizard = ({ components }: { components: ComponentType<IProps>[] }) => {
   const [currentStep, setCurrentStep] = useState<number>(0);
-  console.log(currentStep);
 
   return (
     <div

@@ -23,7 +23,7 @@ export const getAll = async (req: Request, res: Response) => {
 
     return res.status(202).json({ notifications, notReadQty });
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -38,6 +38,6 @@ export const read = async (req: Request, res: Response) => {
 
     return res.status(202).json(data);
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };

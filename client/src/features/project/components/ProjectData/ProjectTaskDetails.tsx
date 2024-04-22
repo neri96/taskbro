@@ -23,7 +23,6 @@ const ProjectTaskDetails = ({ data: taskData }: { data: ITask }) => {
   const { task, completed: isTaskCompleted, _id: taskId } = taskData;
 
   const [taskModify] = useProjectTaskModifyMutation();
-  console.log(isTaskCompleted);
 
   const handleChange = async () => {
     const { id, completed: isProjectCompleted } = projectData || {};
@@ -59,7 +58,7 @@ const ProjectTaskDetails = ({ data: taskData }: { data: ITask }) => {
         }
       }
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 

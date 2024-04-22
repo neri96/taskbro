@@ -17,7 +17,7 @@ export const getChat = async (req: Request, res: Response) => {
 
     return res.status(200).json(chat);
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -46,7 +46,7 @@ export const getNewPrivateMessages = async (
 
     return res.status(200).json({ messages, total });
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -65,7 +65,7 @@ export const readPrivateMsgs = async (req: Request, res: Response) => {
 
     return res.status(200).json("Successfully read all the messages");
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -82,7 +82,7 @@ export const getMessages = async (req: Request, res: Response) => {
 
     return res.status(200).json(messages);
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -108,7 +108,7 @@ export const createMessage = async (req: Request, res: Response) => {
 
     return res.status(200).json("Message has been sent");
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -129,6 +129,6 @@ export const getPrivateMessages = async (req: Request, res: Response) => {
 
     return res.status(200).json(messages);
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };

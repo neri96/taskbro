@@ -12,8 +12,6 @@ export default (req: Request, res: Response, next: NextFunction) => {
 
     next();
   } catch (error) {
-    console.log(error);
-
     return res.status(401).json({ error: "Invalid access token" });
   }
 };

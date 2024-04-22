@@ -54,7 +54,7 @@ const ProfileEdit = ({ userData }: { userData: IUserData }) => {
 
       handleToggle();
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 

@@ -29,7 +29,7 @@ export const getOne = async (req: Request, res: Response) => {
 
     return res.status(200).json(project);
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -63,7 +63,7 @@ export const getAll = async (req: Request, res: Response) => {
 
     return res.status(200).json(projects);
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -110,7 +110,7 @@ export const create = async (req: Request, res: Response) => {
 
     return res.status(200).json("Project has been successfully created");
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -129,7 +129,7 @@ export const edit = async (req: Request, res: Response) => {
 
     return res.status(200).json("Project has been successfully created");
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -146,7 +146,7 @@ export const addTask = async (req: Request, res: Response) => {
 
     return res.status(200).json("Added new task");
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -176,7 +176,7 @@ export const modifyTask = async (req: Request, res: Response) => {
 
     return res.status(200).json(result);
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -213,7 +213,7 @@ export const complete = async (req: Request, res: Response) => {
       });
     }
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -249,7 +249,7 @@ export const addFiles = async (req: Request, res: Response) => {
       return res.status(200).json("Successfully uploaded file");
     }
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -262,6 +262,6 @@ export const kickMember = async (req: Request, res: Response) => {
 
     return res.status(200).json("Successfully kicked out");
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };

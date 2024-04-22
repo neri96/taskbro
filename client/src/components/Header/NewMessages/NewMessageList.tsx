@@ -14,7 +14,6 @@ const NewMessageList = ({
   children?: ReactNode;
 }) => {
   const { data } = useContext(NewMessageDataCtx);
-  console.log(isFullOpen);
 
   return (
     <div className={style.newMessageListWrap}>

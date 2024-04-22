@@ -18,8 +18,6 @@ const ChatEmoji = ({
   const { ref, isVisible, setIsVisible } = useClickOutside();
 
   const onEmojiClick = (emojiObject: EmojiClickData) => {
-    console.log(emojiObject.emoji);
-
     setMessage((message) => message + emojiObject.emoji);
     setIsVisible(false);
   };

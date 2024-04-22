@@ -53,7 +53,7 @@ export const me = async (req: Request, res: Response) => {
       token: accessToken,
     });
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -67,7 +67,7 @@ export const getOne = async (req: Request, res: Response) => {
 
     return res.status(202).json(user);
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -79,7 +79,7 @@ export const edit = async (req: Request, res: Response) => {
 
     return res.status(200).json("Data has been updated");
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -97,7 +97,7 @@ export const modifyFavList = async (req: Request, res: Response) => {
 
     return res.status(200).json("Favorite has been added");
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 
@@ -111,7 +111,7 @@ export const search = async (req: Request, res: Response) => {
 
     return res.status(200).json(users);
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
 
     return res.status(500).json(error);
   }
@@ -146,7 +146,7 @@ export const changeImage = async (
 
     return res.status(400).json("Image change failed");
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
 
     return res.status(500).json("Something went wrong, try again later");
   }

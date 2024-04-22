@@ -10,8 +10,6 @@ const useIntersectionObserver = (limit: number) => {
 
   useEffect(() => {
     if (inView) {
-      console.log("in view");
-
       setFetchCount((prevState) => prevState + 1);
     }
   }, [inView]);

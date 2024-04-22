@@ -20,7 +20,7 @@ const useProjectComplete = () => {
         }, 300);
       }
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 

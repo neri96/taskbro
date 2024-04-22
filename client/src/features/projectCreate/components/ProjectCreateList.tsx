@@ -45,7 +45,6 @@ const ProjectCreateList = ({
 
     setTasks((tasks) => ({ ...tasks, list }));
   };
-  console.log(tasks);
 
   return (
     <div className={styles.pcFormTasks}>

@@ -43,7 +43,7 @@ const ProjectTaskAdd = () => {
         setValue("task", "");
       }
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 

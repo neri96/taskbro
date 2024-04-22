@@ -56,8 +56,6 @@ export const login = async (req: Request, res: Response) => {
       token: accessToken,
     });
   } catch (error) {
-    console.log(error);
-
     return res.status(500).json(error);
   }
 };
@@ -118,8 +116,6 @@ export const register = async (req: Request, res: Response) => {
       token: accessToken,
     });
   } catch (error) {
-    console.log(error);
-
     return res.status(500).json(error);
   }
 };
@@ -166,7 +162,7 @@ export const refresh = async (req: Request, res: Response) => {
       accessToken,
     });
   } catch (error) {
-    console.log(error);
+    return res.status(500).json(error);
   }
 };
 

@@ -30,7 +30,7 @@ const ChatInput = ({
         sendMessage(message);
         setMessage("");
       } catch (error) {
-        console.log(error);
+        throw error;
       }
     }
   };

@@ -28,7 +28,6 @@ const ProjectFilesHeader = ({
       await handleUpload(id, e.target.files);
     }
   };
-  console.log(selectedFile);
 
   const handleDownload = () => {
     fetch(selectedFile.link, {
