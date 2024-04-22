@@ -8,6 +8,7 @@ import {
 } from "react";
 
 import { useLazySearchQuery } from "../../../app/services/user";
+import useUserData from "../../../hooks/useUserData";
 
 import Prev from "../shared/Prev";
 import Input from "../../../components/Input";
@@ -26,6 +27,8 @@ const ProjectCreateSearch = ({
   style: CSSProperties;
   handlePrev: () => void;
 }) => {
+  const { favorites: myFavs } = useUserData();
+
   const [userName, setUserName] = useState<string>("");
 
   const [searchUsers, { data }] = useLazySearchQuery();
@@ -50,19 +53,23 @@ const ProjectCreateSearch = ({
           ) => setUserName(e.target.value)}
         />
       </div>
-      {data ? (
-        <UserList
-          users={data}
-          target={team.map((member) => {
-            const { id } = member;
+      <UserList
+        users={userName.length >= 2 ? data : myFavs}
+        target={team.map((member) => {
+          const { id } = member;
 
-            return id;
-          })}
-          handleModify={(input: IUserList) =>
-            setTeam((team) => [...team, input])
-          }
-        />
-      ) : null}
+          return id;
+        })}
+        handleModify={(user: IUserList) => {
+          setTeam(() => {
+            const isMember = team.some(({ id }) => id === user.id);
+
+            return isMember
+              ? team.filter((current) => current.id !== user.id)
+              : [...team, user];
+          });
+        }}
+      />
     </div>
   );
 };

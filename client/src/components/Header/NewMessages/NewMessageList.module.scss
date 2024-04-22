@@ -1,6 +1,11 @@
-.newMessageList {
+.newMessageListWrap {
   background-color: #0d0d0d;
+}
+
+.newMessageList {
   padding: 10px;
   box-sizing: border-box;
   border-radius: 5px;
+  overflow-y: auto;
+  max-height: 385px;
 }

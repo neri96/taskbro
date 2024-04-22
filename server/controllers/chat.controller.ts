@@ -3,6 +3,12 @@ import { Request, Response } from "express";
 import Chat from "../models/chat.model";
 import Message from "../models/message.model";
 
+interface IGetNewPrivateMessages {
+  userId: string;
+  limit: number;
+  fetchCount: number;
+}
+
 export const getChat = async (req: Request, res: Response) => {
   const { id } = req.query;
 
@@ -15,23 +21,30 @@ export const getChat = async (req: Request, res: Response) => {
   }
 };
 
-export const getNewPrivateMessages = async (req: Request, res: Response) => {
-  const { userId } = req.query;
+export const getNewPrivateMessages = async (
+  req: Request<{}, {}, {}, IGetNewPrivateMessages>,
+  res: Response
+) => {
+  const { userId, limit, fetchCount } = req.query;
 
   try {
-    const messages = await Message.find({
+    const config = {
       to: userId,
       read: false,
       isPrivate: true,
-    })
+    };
+
+    const messages = await Message.find(config)
       .populate("from", "id name nickname image")
       .limit(15)
       .sort({
         createdAt: -1,
       })
-      .limit(5);
+      .limit(+fetchCount ? fetchCount * limit : limit);
 
-    return res.status(200).json(messages);
+    const total = await Message.countDocuments(config);
+
+    return res.status(200).json({ messages, total });
   } catch (error) {
     console.log(error);
   }

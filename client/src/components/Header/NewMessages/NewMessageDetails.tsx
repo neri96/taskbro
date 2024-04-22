@@ -1,18 +1,29 @@
-import { useAppDispatch } from "../../../app/store";
-
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useAppDispatch } from "../../../app/store";
+
 import { setIsChatOpen } from "../../../app/globalSlice";
+import { IPrivate } from "../../../app/services/chat";
 
 import UserImage from "../../UserImage";
 
-import { IPrivate } from "../../../app/services/chat";
+import { NewMessageDataCtx } from "../../../context";
 
 import style from "./NewMessageDetails.module.scss";
 
-const NewMessageDetails = ({ data }: { data: IPrivate }) => {
+const NewMessageDetails = ({
+  data,
+  lowerScrollMarker,
+}: {
+  data: IPrivate;
+  lowerScrollMarker: boolean;
+}) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const { markerRef } = useContext(NewMessageDataCtx);
+  const itemProps = lowerScrollMarker ? { ref: markerRef } : {};
 
   const { from, content } = data;
 
@@ -22,7 +33,7 @@ const NewMessageDetails = ({ data }: { data: IPrivate }) => {
   };
 
   return (
-    <div className={style.nmDetails} onClick={handleClick}>
+    <div className={style.nmDetails} onClick={handleClick} {...itemProps}>
       <div className={style.nmDetailsImg}>
         <UserImage src={from.image} alt={from.nickname} round />
       </div>

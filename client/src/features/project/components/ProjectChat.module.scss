@@ -16,3 +16,9 @@
     }
   }
 }
+
+@media (max-width: 600px) {
+  .projectChat {
+    width: calc(100% - 40px);
+  }
+}

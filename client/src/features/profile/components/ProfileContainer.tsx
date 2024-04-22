@@ -38,7 +38,7 @@ export const ProfileContainer = () => {
   const { data, isLoading, isFetching } = userData;
 
   if (isLoading || !data) {
-    return <Loading />;
+    return null;
   }
 
   return (

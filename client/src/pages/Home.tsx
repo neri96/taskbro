@@ -5,7 +5,7 @@ import Projects from "../features/projects/components/Projects";
 
 const Home = () => {
   return (
-    <PageLayout style={{ display: "flex" }}>
+    <PageLayout style={{ display: "flex", position: "relative" }}>
       <SideNav />
       <Projects />
     </PageLayout>

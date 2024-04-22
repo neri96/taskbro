@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 import Icon from "./Icon";
 
 import IcClose from "../assets/icons/close.svg";
@@ -11,10 +13,12 @@ const CloseSidebar = ({
   position = ClosePosition.Left,
   isSidebarOpen,
   handleSidebar,
+  style,
 }: {
   position?: ClosePosition;
   isSidebarOpen: boolean;
   handleSidebar: () => void;
+  style?: CSSProperties;
 }) => {
   return isSidebarOpen ? (
     <div
@@ -22,13 +26,10 @@ const CloseSidebar = ({
         position: "absolute",
         top: "10px",
         [position === ClosePosition.Left ? "left" : "right"]: "-30px",
+        ...style,
       }}
     >
-      <Icon
-        src={IcClose}
-        alt="Close favorites list"
-        handleClick={handleSidebar}
-      />
+      <Icon src={IcClose} alt="Close sidebar" handleClick={handleSidebar} />
     </div>
   ) : null;
 };

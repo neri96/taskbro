@@ -54,12 +54,15 @@ export const chatApi = api.injectEndpoints({
       },
       providesTags: ["Chat"],
     }),
-    newPrivateMessage: build.query<IPrivate[], string>({
-      query(userId) {
+    newPrivateMessage: build.query<
+      { messages: IPrivate[]; total: number },
+      { userId: string; limit: number; fetchCount?: number }
+    >({
+      query(params) {
         return {
           url: "/chat/new-private-messages",
           method: "GET",
-          params: { userId },
+          params,
         };
       },
       providesTags: ["Chat"],

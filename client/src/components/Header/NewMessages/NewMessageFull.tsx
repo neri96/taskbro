@@ -13,7 +13,7 @@ const NewMessageFull = ({
 }) => {
   return (
     <Modal isOpen={isOpen} closeModal={toggleFullModal}>
-      <NewMessageList>
+      <NewMessageList isFullOpen={isOpen}>
         <div className={style.newMessageFull}>
           <Button handleClick={toggleFullModal}>Ok</Button>
         </div>

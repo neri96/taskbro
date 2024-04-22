@@ -40,7 +40,7 @@ const Header = () => {
             <li className={styles.mainHeaderItem}>
               <ProjectCreate />
             </li>
-            <li className={styles.mainHeaderItem}>
+            <li className={styles.mainHeaderItem} style={{ zIndex: 1000 }}>
               <Notification />
             </li>
             <li className={styles.mainHeaderItem}>

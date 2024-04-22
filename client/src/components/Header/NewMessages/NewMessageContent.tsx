@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 
 import AnimElement from "../../AnimElement";
 import Button from "../../Button";
@@ -9,10 +9,16 @@ import style from "./NewMessageContent.module.scss";
 
 const NewMessageContent = ({
   isNewMsgListOpen,
+  setMsgLimit,
 }: {
   isNewMsgListOpen: boolean;
+  setMsgLimit: Dispatch<SetStateAction<number>>;
 }) => {
   const [isFullOpen, setIsFullOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    setMsgLimit(isFullOpen ? 15 : 5);
+  }, [isFullOpen]);
 
   const toggleFullModal = () => {
     setIsFullOpen((prevState) => !prevState);

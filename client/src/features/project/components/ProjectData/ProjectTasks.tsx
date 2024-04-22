@@ -10,9 +10,11 @@ const ProjectTasks = ({ data }: { data: ITask[] }) => {
   return (
     <div className={styles.projectTasks}>
       <div className={styles.projectTasksTop}>
-        {data.map((task) => {
-          return <ProjectTaskDetails key={task._id} data={task} />;
-        })}
+        <div className={styles.projectTasksAll}>
+          {data.map((task) => {
+            return <ProjectTaskDetails key={task._id} data={task} />;
+          })}
+        </div>
       </div>
       <div className={styles.projectTasksBottom}>
         <ProjectTaskAdd />

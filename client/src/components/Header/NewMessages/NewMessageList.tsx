@@ -6,14 +6,29 @@ import { NewMessageDataCtx } from "../../../context";
 
 import style from "./NewMessageList.module.scss";
 
-const NewMessageList = ({ children }: { children?: ReactNode }) => {
+const NewMessageList = ({
+  isFullOpen = false,
+  children,
+}: {
+  isFullOpen?: boolean;
+  children?: ReactNode;
+}) => {
   const { data } = useContext(NewMessageDataCtx);
+  console.log(isFullOpen);
 
   return (
-    <div className={style.newMessageList}>
-      {data.map((newMessage) => {
-        return <NewMessageDetails key={newMessage.id} data={newMessage} />;
-      })}
+    <div className={style.newMessageListWrap}>
+      <div className={style.newMessageList}>
+        {data.map((newMessage, index) => {
+          return (
+            <NewMessageDetails
+              key={newMessage.id}
+              data={newMessage}
+              lowerScrollMarker={isFullOpen && index === data.length - 3}
+            />
+          );
+        })}
+      </div>
       {children}
     </div>
   );

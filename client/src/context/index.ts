@@ -35,6 +35,8 @@ export const ProjectTaskChatCtx = createContext<{
 
 export const NewMessageDataCtx = createContext<{
   data: IPrivate[];
+  markerRef: any;
 }>({
   data: [],
+  markerRef: null,
 });
