@@ -8,7 +8,9 @@ import {
 } from "react";
 
 import { useLazySearchQuery } from "../../../app/services/user";
+
 import useUserData from "../../../hooks/useUserData";
+import useThrottle from "../../../hooks/useThrottle";
 
 import Prev from "../shared/Prev";
 import Input from "../../../components/Input";
@@ -30,14 +32,13 @@ const ProjectCreateSearch = ({
   const { favorites: myFavs } = useUserData();
 
   const [userName, setUserName] = useState<string>("");
+  const throttledValue = useThrottle(userName.length >= 3 ? userName : "");
 
   const [searchUsers, { data }] = useLazySearchQuery();
 
   useEffect(() => {
-    if (userName.length >= 2) {
-      searchUsers(userName);
-    }
-  }, [userName]);
+    searchUsers(throttledValue);
+  }, [throttledValue]);
 
   return (
     <div style={style}>
@@ -54,7 +55,7 @@ const ProjectCreateSearch = ({
         />
       </div>
       <UserList
-        users={userName.length >= 2 ? data : myFavs}
+        users={throttledValue.length >= 3 ? data : myFavs}
         target={team.map((member) => {
           const { id } = member;
 

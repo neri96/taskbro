@@ -11,6 +11,8 @@ import CloseSidebar, {
 
 import { useLazySearchQuery } from "../../../../app/services/user";
 
+import useThrottle from "../../../../hooks/useThrottle";
+
 import styles from "./style.module.scss";
 
 const ProfileFavorites = ({
@@ -25,20 +27,19 @@ const ProfileFavorites = ({
   handleFavList: () => void;
 }) => {
   const [userName, setUserName] = useState<string>("");
+  const throttledValue = useThrottle(userName.length >= 3 ? userName : "");
 
   const [searchUsers, { data }] = useLazySearchQuery();
 
   useEffect(() => {
-    if (!isItMe && userName.length) {
+    if (!isItMe && throttledValue.length) {
       searchUsers("");
     }
   }, [isItMe]);
 
   useEffect(() => {
-    if (userName.length >= 3) {
-      searchUsers(userName);
-    }
-  }, [userName]);
+    searchUsers(throttledValue);
+  }, [throttledValue]);
 
   return (
     <aside
@@ -65,7 +66,7 @@ const ProfileFavorites = ({
           />
         </div>
       </Protected>
-      <ProfileFavList userName={userName} searchList={data} />
+      <ProfileFavList userName={throttledValue} searchList={data} />
     </aside>
   );
 };
