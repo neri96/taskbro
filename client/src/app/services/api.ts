@@ -4,15 +4,17 @@ import type {
   FetchArgs,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query";
-import { RootState } from "../store";
 
 import { setCredentials, logOut } from "../../features/auth/authSlice";
+
+import * as ls from "../../localStorage";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_BASE_URL,
   credentials: "include",
-  prepareHeaders: (headers, { getState }) => {
-    const token = (getState() as RootState).auth.token;
+  prepareHeaders: (headers) => {
+    // const token = (getState() as RootState).auth.token;
+    const token = ls.getToken();
 
     if (token) {
       headers.set("authentication", `Bearer ${token}`);
@@ -37,11 +39,13 @@ const baseQueryWithReauth: BaseQueryFn<
 
     if (refreshResult?.data) {
       api.dispatch(setCredentials({ ...refreshResult.data }));
+      ls.setToken(refreshResult.data.token);
 
       result = await baseQuery(args, api, extraOptions);
     } else {
       if (refreshResult?.error?.status === 403) {
         api.dispatch(logOut({ ...refreshResult.data }));
+        ls.removeToken();
 
         refreshResult.error.data.message = "Your token has expired";
       }

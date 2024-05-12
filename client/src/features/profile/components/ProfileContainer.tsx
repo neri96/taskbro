@@ -12,7 +12,6 @@ import ProfileFavorites from "./ProfileFavorites";
 import ProfileContent from "./ProfileContent";
 import ProfileChat from "./ProfileChat";
 import AnimElement from "../../../components/AnimElement";
-import Loading from "../../../components/Loading";
 
 import { ProfileChatStatusCtx } from "../../../context";
 
@@ -50,6 +49,7 @@ export const ProfileContainer = () => {
     >
       <ProfileFavorites
         userId={data.id}
+        isItMe={me === userNickname}
         isFavListOpen={isFavListOpen}
         handleFavList={() => setIsFavListOpen((prevState) => !prevState)}
       />

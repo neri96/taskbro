@@ -22,19 +22,18 @@ const SideNav = () => {
         handleSidebar={toggleSidebar}
         style={{ left: "200px" }}
       />
-      <Icon
-        src={IcSidebar}
-        alt="Sidebar"
-        handleClick={toggleSidebar}
-        style={{
-          position: "absolute",
-          left: "5px",
-          top: "5px",
-          background: "#333",
-          padding: "5px",
-          borderRadius: "5px",
-        }}
-      />
+      <div className={styles.sideNavIcon}>
+        <Icon
+          src={IcSidebar}
+          alt="Sidebar"
+          handleClick={toggleSidebar}
+          style={{
+            background: "#333",
+            padding: "5px",
+            borderRadius: "5px",
+          }}
+        />
+      </div>
       <aside
         className={classNames(styles.sideNav, {
           [styles.sideBarOpen]: isSidebarOpen,

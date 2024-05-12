@@ -11,7 +11,7 @@ import { IMessage } from "./shared/interfaces";
 const ChatMessage = ({ data, userId }: { data: IMessage; userId: string }) => {
   const {
     content,
-    from: { id, name, image },
+    from: { id, nickname, image },
     createdAt,
   } = data;
 
@@ -22,10 +22,10 @@ const ChatMessage = ({ data, userId }: { data: IMessage; userId: string }) => {
       })}
     >
       <div className={styles.chatMessageImage}>
-        <UserImage src={image} alt={name} />
+        <UserImage src={image} alt={nickname} />
       </div>
       <div className={styles.chatMessageData}>
-        <div className={styles.chatMessageName}>{name}</div>
+        <div className={styles.chatMessageName}>{nickname}</div>
         <div className={styles.chatMessageContent}>
           <p>{content}</p>
         </div>

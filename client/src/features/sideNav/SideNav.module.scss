@@ -20,6 +20,13 @@
   }
 }
 
+.sideNavIcon {
+  display: none;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+
 @media (max-width: 520px) {
   .sideNav {
     background-color: #333;
@@ -32,5 +39,9 @@
     &.sideBarOpen {
       transform: translate(200px);
     }
+  }
+
+  .sideNavIcon {
+    display: block;
   }
 }

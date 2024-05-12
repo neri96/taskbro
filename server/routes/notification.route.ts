@@ -4,7 +4,9 @@ const router = express.Router();
 
 import { getAll, read } from "../controllers/notification.controller";
 
-router.get("/all", getAll);
-router.patch("/read", read);
+import auth from "../middleware/auth";
+
+router.get("/all", auth, getAll);
+router.patch("/read", auth, read);
 
 export default router;

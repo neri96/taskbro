@@ -63,7 +63,7 @@ const ProjectTaskAdd = () => {
         isOpen={isVisible}
         closeModal={handleToggle}
       >
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
           <Input
             name="task"
             label="Task"

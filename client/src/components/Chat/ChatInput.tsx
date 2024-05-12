@@ -37,7 +37,7 @@ const ChatInput = ({
 
   return (
     <div className={styles.chatInput}>
-      <form onSubmit={handleSubmit}>
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <div className={styles.chatContainer}>
           <input
             name="message"

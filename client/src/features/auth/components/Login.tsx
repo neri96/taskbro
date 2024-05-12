@@ -11,6 +11,8 @@ import Input from "../../../components/Input";
 import FormFooter from "../../../components/FormFooter";
 import Button, { BtnType } from "../../../components/Button";
 
+import * as ls from "../../../localStorage";
+
 interface IInput {
   email: string;
   password: string;
@@ -32,7 +34,8 @@ const Login = () => {
     try {
       const { user, token } = await logIn(data).unwrap();
 
-      dispatch(setCredentials({ user, token }));
+      ls.setToken(token);
+      dispatch(setCredentials({ user }));
 
       navigate("/");
     } catch (error) {

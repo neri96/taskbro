@@ -31,7 +31,7 @@ export const login = async (req: Request, res: Response) => {
       { id: String(user.id), nickname: user.nickname, email },
       process.env.ACCESS_SECRET_KEY as string,
       {
-        expiresIn: "1min",
+        expiresIn: "15m",
       }
     );
 
@@ -91,7 +91,7 @@ export const register = async (req: Request, res: Response) => {
       { id: String(newUser.id), nickname, email },
       process.env.ACCESS_SECRET_KEY as string,
       {
-        expiresIn: "1min",
+        expiresIn: "15m",
       }
     );
 
@@ -159,7 +159,7 @@ export const refresh = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       user: foundUser,
-      accessToken,
+      token: accessToken,
     });
   } catch (error) {
     return res.status(500).json(error);

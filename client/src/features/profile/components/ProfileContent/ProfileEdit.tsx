@@ -67,7 +67,7 @@ const ProfileEdit = ({ userData }: { userData: IUserData }) => {
         closeModal={handleToggle}
         header="Edit Profile"
       >
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
           <Input
             label="Name"
             name="name"

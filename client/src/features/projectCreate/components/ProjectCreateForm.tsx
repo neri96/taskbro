@@ -99,6 +99,7 @@ const ProjectCreateForm = ({
 
   return (
     <form
+      autoComplete="off"
       style={style}
       onSubmit={handleSubmit(onSubmit)}
       onKeyDown={(e) => {

@@ -11,6 +11,8 @@ import Input from "../../../components/Input";
 import FormFooter from "../../../components/FormFooter";
 import Button, { BtnType } from "../../../components/Button";
 
+import * as ls from "../../../localStorage";
+
 interface IInput {
   nickname: string;
   name: string;
@@ -34,7 +36,8 @@ const Register = () => {
     try {
       const { user, token } = await signUp(data).unwrap();
 
-      dispatch(setCredentials({ user, token }));
+      ls.setToken(token);
+      dispatch(setCredentials({ user }));
 
       navigate("/");
     } catch (error) {
@@ -48,7 +51,7 @@ const Register = () => {
         <h4>Create Account</h4>
         <h4>to get started now!</h4>
       </AuthGreeting>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
         <Input
           label="Nickname"
           name="nickname"

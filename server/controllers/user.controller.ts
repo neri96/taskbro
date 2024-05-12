@@ -105,14 +105,14 @@ export const search = async (req: Request, res: Response) => {
   const { searchName } = req.query;
 
   try {
+    if (!searchName) return res.status(200).json([]);
+
     const users = await User.find({
       nickname: { $regex: searchName, $options: "i" },
     }).select("-password");
 
     return res.status(200).json(users);
   } catch (error) {
-    return res.status(500).json(error);
-
     return res.status(500).json(error);
   }
 };
@@ -147,7 +147,5 @@ export const changeImage = async (
     return res.status(400).json("Image change failed");
   } catch (error) {
     return res.status(500).json(error);
-
-    return res.status(500).json("Something went wrong, try again later");
   }
 };

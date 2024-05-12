@@ -14,6 +14,8 @@ import {
 
 import { storage, checkFileType } from "../middleware/multer";
 
+import auth from "../middleware/auth";
+
 const upload = multer({
   storage,
   fileFilter: (_req, file, cb) => {
@@ -22,10 +24,10 @@ const upload = multer({
 });
 
 router.get("/me", me);
-router.get("/one", getOne);
-router.patch("/edit", edit);
-router.post("/image", upload.single("image"), changeImage);
-router.get("/search", search);
-router.patch("/favmodify", modifyFavList);
+router.get("/one", auth, getOne);
+router.patch("/edit", auth, edit);
+router.post("/image", auth, upload.single("image"), changeImage);
+router.get("/search", auth, search);
+router.patch("/favmodify", auth, modifyFavList);
 
 export default router;

@@ -16,6 +16,7 @@ import {
 } from "../controllers/project.controller";
 
 import { storage, checkFileType } from "../middleware/multer";
+import auth from "../middleware/auth";
 
 export const itemValidation = [];
 
@@ -26,17 +27,17 @@ const upload = multer({
   },
 });
 
-router.get("/one", getOne);
-router.get("/all", getAll);
-router.post("/create", create);
-router.patch("/edit", edit);
-router.patch("/complete", complete);
+router.get("/one", auth, getOne);
+router.get("/all", auth, getAll);
+router.post("/create", auth, create);
+router.patch("/edit", auth, edit);
+router.patch("/complete", auth, complete);
 
-router.post("/task-add", addTask);
-router.patch("/task-modify", modifyTask);
+router.post("/task-add", auth, addTask);
+router.patch("/task-modify", auth, modifyTask);
 
-router.post("/file-add", upload.any(), addFiles);
+router.post("/file-add", auth, upload.any(), addFiles);
 
-router.patch("/kick", kickMember);
+router.patch("/kick", auth, kickMember);
 
 export default router;

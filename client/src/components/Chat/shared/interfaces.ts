@@ -1,7 +1,7 @@
 export interface IMessage {
   id: string;
   content: string;
-  from: { id: string; name: string; image: string };
+  from: { id: string; nickname: string; image: string };
   createdAt: string;
 }
 

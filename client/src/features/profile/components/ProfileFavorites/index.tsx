@@ -15,16 +15,24 @@ import styles from "./style.module.scss";
 
 const ProfileFavorites = ({
   userId,
+  isItMe,
   isFavListOpen,
   handleFavList,
 }: {
   userId: string;
+  isItMe: boolean;
   isFavListOpen: boolean;
   handleFavList: () => void;
 }) => {
   const [userName, setUserName] = useState<string>("");
 
   const [searchUsers, { data }] = useLazySearchQuery();
+
+  useEffect(() => {
+    if (!isItMe && userName.length) {
+      searchUsers("");
+    }
+  }, [isItMe]);
 
   useEffect(() => {
     if (userName.length >= 3) {

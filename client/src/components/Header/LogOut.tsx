@@ -2,6 +2,7 @@ import { useLogOutMutation } from "../../app/services/auth";
 import { useAppDispatch } from "../../app/store";
 
 import { logOut } from "../../features/auth/authSlice";
+import * as ls from "../../localStorage";
 
 import Icon from "../Icon";
 
@@ -17,6 +18,7 @@ const LogOut = () => {
       await logOutMut({}).unwrap();
 
       dispatch(logOut());
+      ls.removeToken();
     } catch (error) {
       throw error;
     }

@@ -1,12 +1,10 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { Routes, Route, Navigate } from "react-router-dom";
 
 import { ErrorBoundary } from "react-error-boundary";
 
-import { useTypedSelector } from "./app/store";
 import { useAppDispatch } from "./app/store";
-import { selectAuthStatus } from "./features/auth/authSlice";
 import { setCredentials } from "./features/auth/authSlice";
 
 import { useMeQuery } from "./app/services/user";
@@ -21,18 +19,35 @@ import Project from "./pages/Project";
 import ErrorFallback from "./components/ErrorFallback";
 import Loading from "./components/Loading";
 
-const App = () => {
-  const dispatch = useAppDispatch();
+import * as ls from "./localStorage";
 
-  const isAuth = useTypedSelector(selectAuthStatus);
+const App = () => {
+  const [isAuth, setIsAuth] = useState<boolean>(false);
+
+  const dispatch = useAppDispatch();
 
   const { data, isLoading } = useMeQuery(undefined);
 
+  const handleAuthStatus = () => {
+    const token = ls.getToken();
+
+    setIsAuth(Boolean(token));
+  };
+
+  useEffect(() => {
+    handleAuthStatus();
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("storage", handleAuthStatus);
+    return () => window.removeEventListener("storage", handleAuthStatus);
+  }, []);
+
   useEffect(() => {
     if (data) {
-      const { user, token } = data;
+      const { user } = data;
 
-      dispatch(setCredentials({ user, token }));
+      dispatch(setCredentials({ user }));
     }
   }, [data]);
 
