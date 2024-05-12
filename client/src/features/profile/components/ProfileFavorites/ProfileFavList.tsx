@@ -28,7 +28,7 @@ const ProfileFavList = ({
 
   return searchList?.length || favorites?.length ? (
     <UserList
-      users={userName.length >= 2 && searchList ? searchList : favorites}
+      users={userName.length >= 3 && searchList ? searchList : favorites}
       target={(favorites || searchList || []).map((fav: IFav) => {
         const { id } = fav;
 
