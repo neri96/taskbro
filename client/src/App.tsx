@@ -26,7 +26,7 @@ const App = () => {
 
   const dispatch = useAppDispatch();
 
-  const { data, isLoading } = useMeQuery(undefined);
+  const { data, isLoading } = useMeQuery(undefined, { skip: !isAuth });
 
   const handleAuthStatus = () => {
     const token = ls.getToken();

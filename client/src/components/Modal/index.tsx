@@ -3,17 +3,21 @@ import ReactDOM from "react-dom";
 
 import { motion, AnimatePresence } from "framer-motion";
 
+import classnames from "classnames";
+
 import styles from "./style.module.scss";
 
 const Modal = ({
   isOpen,
   header,
   children,
+  isOverflowHidden = true,
   closeModal,
 }: {
   isOpen: boolean;
   header?: ReactNode | string;
   children: ReactNode;
+  isOverflowHidden?: boolean;
   closeModal: () => void;
 }) => {
   const rootElement = document.querySelector("#modal");
@@ -33,7 +37,9 @@ const Modal = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ delay: 0.3 }}
-            className={styles.modal}
+            className={classnames(styles.modal, {
+              [styles.overflowHidden]: isOverflowHidden,
+            })}
             onClick={(e) => e.stopPropagation()}
           >
             {header ? (

@@ -1,24 +1,28 @@
 .projects {
   padding: 10px;
   box-sizing: border-box;
-  width: 100%;
   display: grid;
+  width: 100%;
   gap: 10px;
-  grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
-  justify-content: start;
+  grid-template-columns: auto auto auto;
+  // justify-content: start;
   grid-auto-rows: 200px;
-}
-
-@media (max-width: 940px) {
-  .projects {
-    width: 50%;
-    margin: 0 auto;
+  &.projectsFull {
+    width: 100%;
   }
 }
 
-@media (max-width: 770px) {
+@media (max-width: 1300px) {
   .projects {
-    width: 100%;
-    margin: 0 auto;
+    grid-template-columns: auto auto;
+
+    // width: 50%;
+    // margin: 0 auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .projects {
+    grid-template-columns: auto;
   }
 }

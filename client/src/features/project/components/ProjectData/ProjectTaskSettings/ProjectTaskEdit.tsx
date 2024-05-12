@@ -64,7 +64,12 @@ const ProjectTaskEdit = ({
     <>
       <Icon src={IcEdit} alt="Edit" handleClick={handleToggleEdit} />
 
-      <Modal header="Edit" isOpen={isEditOpen} closeModal={handleToggleEdit}>
+      <Modal
+        header="Edit"
+        isOpen={isEditOpen}
+        closeModal={handleToggleEdit}
+        isOverflowHidden={false}
+      >
         <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
           <Input
             label="Title"
