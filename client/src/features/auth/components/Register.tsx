@@ -6,6 +6,8 @@ import { useAppDispatch } from "../../../app/store";
 import { useRegisterMutation } from "../../../app/services/auth";
 import { setCredentials } from "../authSlice";
 
+import useError from "../../../hooks/useError";
+
 import AuthGreeting from "./AuthGreeting";
 import Input from "../../../components/Input";
 import FormFooter from "../../../components/FormFooter";
@@ -28,7 +30,10 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<IInput>();
+
+  const { handleServerError } = useError();
 
   const [signUp] = useRegisterMutation();
 
@@ -41,7 +46,7 @@ const Register = () => {
 
       navigate("/");
     } catch (error) {
-      throw error;
+      handleServerError(error, setError);
     }
   };
 

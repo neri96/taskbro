@@ -6,6 +6,8 @@ import { useAppDispatch } from "../../../app/store";
 import { useLoginMutation } from "../../../app/services/auth";
 import { setCredentials } from "../authSlice";
 
+import useError from "../../../hooks/useError";
+
 import AuthGreeting from "./AuthGreeting";
 import Input from "../../../components/Input";
 import FormFooter from "../../../components/FormFooter";
@@ -26,7 +28,10 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<IInput>();
+
+  const { handleServerError } = useError();
 
   const [logIn] = useLoginMutation();
 
@@ -39,7 +44,7 @@ const Login = () => {
 
       navigate("/");
     } catch (error) {
-      throw error;
+      handleServerError(error, setError);
     }
   };
 

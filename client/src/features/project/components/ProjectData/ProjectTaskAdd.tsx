@@ -12,6 +12,7 @@ import FormFooter from "../../../../components/FormFooter";
 
 import useProjectData from "../../hooks/useProjectData";
 import useClickOutside from "../../../../hooks/useClickOutside";
+import useError from "../../../../hooks/useError";
 
 import IcAdd from "../../../../assets/icons/add2.svg";
 
@@ -25,6 +26,8 @@ const ProjectTaskAdd = () => {
   const { ref, isVisible, handleToggle } = useClickOutside();
   const projectPastDue = useContext(ProjectPastDueCtx);
 
+  const { handleServerError } = useError();
+
   const [addTask] = useProjectTaskAddMutation();
 
   const {
@@ -32,6 +35,7 @@ const ProjectTaskAdd = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<{ task: string }>();
 
   const onSubmit: SubmitHandler<{ task: string }> = async ({ task }) => {
@@ -43,7 +47,7 @@ const ProjectTaskAdd = () => {
         setValue("task", "");
       }
     } catch (error) {
-      throw error;
+      handleServerError(error, setError);
     }
   };
 

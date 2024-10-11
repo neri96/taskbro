@@ -8,6 +8,8 @@ import Input from "../../../../components/Input";
 import FormFooter from "../../../../components/FormFooter";
 import Button, { BtnType } from "../../../../components/Button";
 
+import useError from "../../../../hooks/useError";
+
 import IcEdit from "../../../../assets/icons/edit.svg";
 
 import { useEditMutation } from "../../../../app/services/user";
@@ -20,6 +22,8 @@ interface IUserData {
 }
 
 const ProfileEdit = ({ userData }: { userData: IUserData }) => {
+  const { handleServerError } = useError();
+
   const [isEditOpen, setIsEditOpen] = useState<boolean>(false);
 
   const handleToggle = () => setIsEditOpen((isEditOpen) => !isEditOpen);
@@ -32,6 +36,7 @@ const ProfileEdit = ({ userData }: { userData: IUserData }) => {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<IUserData>();
 
   useEffect(() => {
@@ -54,7 +59,7 @@ const ProfileEdit = ({ userData }: { userData: IUserData }) => {
 
       handleToggle();
     } catch (error) {
-      throw error;
+      handleServerError(error, setError);
     }
   };
 

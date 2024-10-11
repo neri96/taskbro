@@ -5,6 +5,7 @@ import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { useProjectEditMutation } from "../../../../../app/services/project";
 
 import useClickOutside from "../../../../../hooks/useClickOutside";
+import useError from "../../../../../hooks/useError";
 
 import Modal from "../../../../../components/Modal";
 import Icon from "../../../../../components/Icon";
@@ -30,6 +31,7 @@ const ProjectTaskEdit = ({
 }) => {
   const { isVisible: isEditOpen, handleToggle: handleToggleEdit } =
     useClickOutside();
+  const { handleServerError } = useError();
 
   const [editProject] = useProjectEditMutation();
 
@@ -39,6 +41,7 @@ const ProjectTaskEdit = ({
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<IProjectEdit>();
 
   useEffect(() => {
@@ -56,7 +59,7 @@ const ProjectTaskEdit = ({
 
       handleToggleEdit();
     } catch (error) {
-      throw error;
+      handleServerError(error, setError);
     }
   };
 
