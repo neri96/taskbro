@@ -8,6 +8,7 @@ const useProjectComplete = () => {
   const handleComplete = async (data: {
     projectId: string;
     isCurrentlyCompleted: boolean;
+    cancelAllTasks: boolean;
   }) => {
     try {
       const result = await projectComplete(data).unwrap();

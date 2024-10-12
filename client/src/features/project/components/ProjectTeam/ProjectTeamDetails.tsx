@@ -8,7 +8,7 @@ import useProjectData from "../../hooks/useProjectData";
 
 import styles from "./ProjectTeamDetails.module.scss";
 
-import { IUser } from "../../../../shared/interfaces/user.interface";
+import { IUser } from "../../../../app/services/user";
 
 const ProjectTeamDetails = ({
   data,

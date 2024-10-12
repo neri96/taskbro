@@ -17,6 +17,13 @@ export interface IChatData {
   to?: string;
 }
 
+export interface IFile {
+  _id: string;
+  title: string;
+  fileName: string;
+  fileType: string;
+}
+
 export interface IProjectInput {
   title: string;
   deadline: number;
@@ -33,6 +40,12 @@ export interface IProjectEdit {
   description: string;
 }
 
+export interface IProjectComplete {
+  projectId: string;
+  isCurrentlyCompleted: boolean;
+  cancelAllTasks: boolean;
+}
+
 export interface IProject {
   id: string;
   uid: string;
@@ -46,7 +59,7 @@ export interface IProject {
   chat: string;
   createdAt: string;
   updatedAt: string;
-  files: any;
+  files: IFile[];
 }
 
 export const projectApi = api.injectEndpoints({
@@ -100,14 +113,7 @@ export const projectApi = api.injectEndpoints({
       },
       invalidatesTags: ["Project"],
     }),
-    projectComplete: build.mutation<
-      { completed: boolean },
-      {
-        projectId: string;
-        isCurrentlyCompleted: boolean;
-        cancelAllTasks?: boolean;
-      }
-    >({
+    projectComplete: build.mutation<{ completed: boolean }, IProjectComplete>({
       query(body) {
         return {
           url: "/project/complete",
